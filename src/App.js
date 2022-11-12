@@ -6,6 +6,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import { CartProvider } from './context/CartContext';
 import Cart from './components/Cart/Cart';
 import { NotificationProvider } from './notification/NotificationService';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
                   <Route path='*' element={ <h2>404 NOT FOUND</h2> } />
                 </Routes>
             </main>
+            <footer>
+              <Footer />
+            </footer>
           </BrowserRouter>
         </CartProvider>
       </NotificationProvider>
