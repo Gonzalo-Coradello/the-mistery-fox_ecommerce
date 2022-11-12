@@ -1,6 +1,6 @@
 const products = [
     {
-        id: 1,
+        id: "1",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",
@@ -10,7 +10,7 @@ const products = [
         stock: 5
     },
     {
-        id: 2,
+        id: "2",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",
@@ -20,7 +20,7 @@ const products = [
         stock: 5
     },
     {
-        id: 3,
+        id: "3",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",
@@ -30,7 +30,7 @@ const products = [
         stock: 5
     },
     {
-        id: 4,
+        id: "4",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",
@@ -40,7 +40,7 @@ const products = [
         stock: 5
     },
     {
-        id: 5,
+        id: "5",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",
@@ -50,7 +50,7 @@ const products = [
         stock: 5
     },
     {
-        id: 6,
+        id: "6",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",
@@ -60,7 +60,7 @@ const products = [
         stock: 5
     },
     {
-        id: 7,
+        id: "7",
         title: "The Secret Garden",
         author: "Frances Hodgson Burnett",
         category: "novela",

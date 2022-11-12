@@ -1,5 +1,15 @@
+import { CartContext } from "../../context/CartContext"
+import { useContext } from "react"
+import ItemCount from "../ItemCount/ItemCount"
+
 const ItemDetail = ({ id, title, author, category, description, img, price, stock }) => {
 
+    const { addItem } = useContext(CartContext)
+
+    const handleOnAdd = (quantity) => {
+        const productToAdd = {id, title, img, price}
+        addItem(productToAdd, quantity)
+    }
 
     return (
         <div className="card lg:card-side gap-4 w-4/5 mx-auto mt-4">
@@ -11,11 +21,8 @@ const ItemDetail = ({ id, title, author, category, description, img, price, stoc
                 <h3>{author}</h3>
                 <p>{description}</p>
                 <div>
-                    <h4>Cantidad:</h4>
-                    {/* counter */}
+                    <ItemCount stock={stock} initial={1} price={price} onAdd={handleOnAdd} />
                 </div>
-                <h3>Total: ${price}</h3>
-                <button className="btn btn-outline">Agregar al carrito</button>
             </div>
         </div>
     )
