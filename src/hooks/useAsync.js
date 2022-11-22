@@ -24,7 +24,7 @@ const useAsync = (asyncFn, dependencies = []) => {
             .finally(() => {
                 setLoading(false)
             })
-        }, dependencies)
+        }, dependencies) //eslint-disable-line
 
         return {
             data,

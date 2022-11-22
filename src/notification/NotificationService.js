@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from "react";
 
 const Notification = ({ type, message }) => {
     const [ icon, setIcon ] = useState()
+    const [ alertClass, setAlertClass ] = useState()
 
     const successIcon = <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     const errorIcon = <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -9,16 +10,28 @@ const Notification = ({ type, message }) => {
     const infoIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 
     useEffect(() => {
-        if(type === 'success') setIcon(successIcon)
-        if(type === 'error') setIcon(errorIcon)
-        if(type === 'warning') setIcon(warningIcon)
-        if(type === 'info') setIcon(infoIcon)
+        if(type === 'success') {
+            setIcon(successIcon) 
+            setAlertClass('alert-success')
+        }
+        if(type === 'error') {
+            setIcon(errorIcon) 
+            setAlertClass('alert-error')
+        }
+        if(type === 'warning') {
+            setIcon(warningIcon) 
+            setAlertClass('alert-warning')
+        }
+        if(type === 'info') {
+            setIcon(infoIcon) 
+            setAlertClass('alert-info')
+        }
     }, [type]) // eslint-disable-line 
 
     if(message === '') return
 
     return(
-        <div className={`alert alert-${type} shadow-lg w-fit absolute right-4 top-16`}>
+        <div className={`alert ${alertClass} shadow-lg w-fit fixed z-10 right-4 top-16`}>
             <div>
                 {icon}
                 <span>{ message}</span>

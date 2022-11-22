@@ -1,97 +1,57 @@
-import { useState, useContext } from "react"
-import { CartContext } from "../../context/CartContext"
-// import { addDoc, collection } from 'firebase/firestore'
-import { NotificationContext} from '../../notification/NotificationService'
-import { collection, getDocs, query, where, documentId, writeBatch, addDoc } from 'firebase/firestore'
-import { db } from '../../services/firebase/index'
+import { Link } from "react-router-dom"
+import { FaCopy } from 'react-icons/fa';
+import { NotificationContext } from "../../notification/NotificationService";
+import { useContext } from "react";
 
-import { useNavigate } from "react-router-dom"
 
-const Checkout = () => {
-    const [loading, setLoading] = useState(false)
+const Checkout = ({ checkoutStatus, orderId, OutOfStockList, errorMsg }) => {
 
-    const { cart, total, clearCart } = useContext(CartContext)
     const { setNotification } = useContext(NotificationContext)
 
-    const navigate = useNavigate()
-
-    const createOrder = async () => {
-        setLoading(true)
-
-        try {
-            const objOrder = {
-                buyer: {
-                    name: 'Sebastian Zuviria',
-                    phone: '123456789',
-                    mail: 'contact@sebaz.io'
-                },
-                items: cart,
-                total: total
-            }
-            
-            const batch = writeBatch(db)
-
-            const outOfStock = []
-
-            const ids = cart.map(prod => prod.id)
-    
-            const productsRef = collection(db, 'products')
-    
-            const productsAddedFromFirestore = await getDocs(query(productsRef, where(documentId(), 'in', ids)))
-
-            const { docs } = productsAddedFromFirestore
-
-            docs.forEach(doc => {
-                const dataDoc = doc.data()
-                const stockDb = dataDoc.stock
-
-                const productAddedToCart = cart.find(prod => prod.id === doc.id)
-                const prodQuantity = productAddedToCart?.quantity
-
-                if(stockDb >= prodQuantity) {
-                    batch.update(doc.ref, { stock: stockDb - prodQuantity })
-                } else {
-                    outOfStock.push({ id: doc.id, ...dataDoc})
-                }
-            })
-
-            if(outOfStock.length === 0) {
-                await batch.commit()
-
-                const orderRef = collection(db, 'orders')
-
-                const orderAdded = await addDoc(orderRef, objOrder)
-
-                clearCart()
-
-                setTimeout(() => {
-                    navigate('/')
-                }, 3000)
-
-                setNotification('success', `El id de su orden es: ${orderAdded.id}`)
-            } else {
-               setNotification('error','hay productos que estan fuera de stock')
-            }
-
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setLoading(false)
-        }
-        
+    const handleCopy = () => {
+        navigator.clipboard.writeText(orderId)
+        setNotification('info', `Código copiado al portapapeles`)
     }
 
-    if(loading) {
-        return <h1>Se esta generando su orden...</h1>
+    if(checkoutStatus === 'success') {
+        return (
+            <div className="mt-8 border border-primary-color p-12 grid gap-4 mx-4 max-w-[700px] lg:mx-auto">
+                <h2 className="text-2xl font-semibold mb-4">¡Muchas gracias!</h2>
+                <p>Su orden ha sido generada exitosamente</p>
+                <div className="flex justify-center gap-4">
+                    <p>ID de la orden:
+                        <span className="font-semibold"> {orderId}</span>
+                        <button className="btn btn-sm btn-ghost ml-2 px-2" onClick={handleCopy}><FaCopy /></button>
+                    </p>
+                </div>
+            </div>
+        )
     }
 
-    return (
-        <div>
-            <h1>Checkout</h1>
-            
-            <button onClick={createOrder}>generar orden</button>
-        </div>
-    )
+    if(checkoutStatus === 'outOfStock') {
+        return (
+            <div className="mt-8 border border-primary-color p-12 mx-4 max-w-[700px] lg:mx-auto">
+                <h2 className="text-2xl font-semibold mb-4">Los siguientes productos se encuentran fuera de stock:</h2>
+                {OutOfStockList.map(prod => {
+                    return (
+                        <ul key={prod.id}>
+                            <li className="list-disc text-lg font-semibold">{prod.title} <span className="font-light">({prod.author})</span></li>
+                        </ul>
+                    )
+                })}
+                <Link to='/cart' className='btn mt-8'>Volver al carrito</Link>
+            </div>
+        )
+    }
+
+    if(checkoutStatus === 'error') {
+        return (
+            <div className="mt-8 border border-primary-color p-12 mx-4 max-w-[700px] lg:mx-auto">
+                <h2 className="text-2xl font-semibold mb-4">Ha ocurrido un error</h2>
+                <p>{errorMsg}</p>
+            </div>
+        )
+    }
 }
 
 export default Checkout

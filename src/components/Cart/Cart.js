@@ -17,7 +17,7 @@ const Cart = () => {
     }, [cart])
 
     if(isEmpty) return (
-        <section>
+        <section className="h-[85vh]">
             <h2>Carrito de compras</h2>
             <div>
                 <h2>El carrito está vacío</h2>
@@ -27,7 +27,7 @@ const Cart = () => {
     )
 
     return (
-        <section>
+        <section className="h-[85vh]">
             <h2>Carrito de compras</h2>
             <div>
                 { cart.map(prod => <CartItem key={prod.id} {...prod} /> ) }
