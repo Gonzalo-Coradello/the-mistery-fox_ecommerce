@@ -4,7 +4,7 @@ const Item = ({ id, title, author, img, price }) => {
     return (
         <div className="card border border-primary-color">
             <figure>
-                <img src={img} alt={title} />
+                <div className="h-80"><img className="h-full" src={img} alt={title} /></div>
             </figure>
             <div className="card-body">
                 <h2 className="card-title text-xl font-bold mx-auto">{title}</h2>
