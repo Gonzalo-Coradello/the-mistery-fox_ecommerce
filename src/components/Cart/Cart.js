@@ -21,22 +21,22 @@ const Cart = () => {
             <h2>Carrito de compras</h2>
             <div>
                 <h2>El carrito está vacío</h2>
-                <Link to='/' className='btn'>Comenzá a agregar productos</Link>
+                <Link to='/books' className='btn btn-outline mt-4 normal-case'>Comenzá a agregar productos</Link>
             </div>
         </section>
     )
 
     return (
-        <section className="h-[85vh]">
-            <h2>Carrito de compras</h2>
+        <section className="min-h-[85vh]">
+            <h2 className="font-heading text-2xl font-medium mb-4">Carrito de compras</h2>
             <div>
                 { cart.map(prod => <CartItem key={prod.id} {...prod} /> ) }
             </div>
-            <div className="flex justify-between mx-auto w-11/12 lg:w-4/5 max-w-[850px]">
-                <button onClick={clearCart} className="btn btn-sm btn-ghost">Vaciar carrito</button>
-                <h2 className="font-semibold">Total: ${total}</h2>
+            <div className="flex justify-between items-center mx-auto w-11/12 lg:w-4/5 max-w-[850px]">
+                <button onClick={clearCart} className="btn btn-sm btn-ghost normal-case font-medium transition duration-300">Vaciar carrito</button>
+                <h2 className="text-xl font-bold mr-8">Total: ${total}</h2>
             </div>
-            <Link to='/checkout' className='btn'>Finalizar compra</Link> 
+            <Link to='/checkout' className='btn btn-outline mt-4 normal-case transition duration-300'>Finalizar compra</Link> 
         </section>
     )
 }

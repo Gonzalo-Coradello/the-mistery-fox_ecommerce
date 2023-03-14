@@ -3,20 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #dca54c;
-  --secondary-color: #000;
+  --ff-body: 'Inter', sans-serif;
+  --ff-heading: 'DM Serif Display', serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--ff-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  text-align: center;
+}
+
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.category:hover div {
+  background-color: #243016;
+  /* background-color: #E6AF2E; */
+  /* background-color: #EFCB68; */
+  /* background-color: #FED766; */
+  /* background-color: #E6AF2E; */
+  transition: all 300ms;
 }

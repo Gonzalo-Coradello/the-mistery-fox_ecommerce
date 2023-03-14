@@ -7,16 +7,20 @@ const CartItem = ({ id, title, author, price, img, quantity, stock }) => {
     const { removeItem } = useContext(CartContext)
 
     return (
-        <div className="card card-side border border-primary-color mx-auto flex rounded-md px-2 w-11/12 lg:w-4/5 max-w-[850px] mb-6">
-            <div className="basis-3/12 rounded-md flex items-center py-2">
-                <img src={img} alt={title} className="rounded-md"></img>
+        <div className="card card-side border flex rounded-md px-2 mx-2 lg:w-4/5 max-w-[850px] lg:mx-auto mb-4">
+            <div className="rounded-md flex items-center py-2">
+                <img src={img} alt={title} className="rounded-md max-h-36 max-w-[8rem] sm:max-w-full"></img>
             </div>
-            <div className="card-body basis-9/12 gap-4 mx-auto max-w-[550px]">
+            <div className="sm:card-body justify-center md:gap-4  ">
                 <button onClick={() => removeItem(id)} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                <h2 className="card-title mx-auto">{title}</h2>
-                <h4>{author}</h4>
-                <div className="flex justify-between lg:px-3 mt-2 lg: mt-6">
-                    <ItemCount stock={stock} price={price} initial={quantity} inCart={true} id={id} />
+                <div className="md:flex md:justify-between items-center">
+                    <div className="grid gap-0 py-2">
+                        <h2 className="text-left card-title font-heading mx-auto text-base sm:text-lg lg:text-xl">{title}</h2>
+                        <h4 className="text-left text-xs font-light text-primary/60 sm:text-base">{author}</h4>
+                    </div>
+                    <div className="flex justify-between lg:px-3 py-0 ">
+                        <ItemCount stock={stock} price={price} initial={quantity} inCart={true} id={id} />
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import Loader from "../Loader/Loader";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../services/firebase/firestore/products";
 import useAsync from "../../hooks/useAsync";
+import Categories from "../Categories/Categories";
 
 const ItemListContainer = () => {
 
@@ -28,8 +29,9 @@ const ItemListContainer = () => {
     )
 
     return (
-        <section>
-            <h1 className="text-3xl mb-4">Todos nuestros libros</h1>
+        <section className="bg-base-100">
+            <Categories />
+            <h1 className="text-3xl mb-8 mt-8">Todos nuestros libros</h1>
             <ItemList products={products} />
         </section>
 

@@ -50,9 +50,9 @@ const CheckoutContainer = () => {
 
                     clearCart()
 
-                    setTimeout(() => {
-                        navigate('/')
-                    }, 5000)
+                    // setTimeout(() => {
+                    //     navigate('/')
+                    // }, 5000)
 
                     setCheckoutStatus('success')
                     setLoading(false)
@@ -71,8 +71,8 @@ const CheckoutContainer = () => {
     }
 
     return (
-        <section className="h-[85vh]">
-            <h2 className="text-2xl font-semibold border-b border-primary-color w-fit mx-auto pb-4 px-14">Checkout</h2>
+        <section className="min-h-[85vh]">
+            <h2 className="font-heading text-2xl font-bold border-b w-fit mx-auto pb-4 px-14">Checkout</h2>
             <div>
                 { checkoutStatus ?
                 <Checkout checkoutStatus={checkoutStatus} orderId={orderId} OutOfStockList={OutOfStockList} errorMsg={errorMsg} /> :

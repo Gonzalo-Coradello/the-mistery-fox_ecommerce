@@ -27,11 +27,11 @@ const ItemDetailContainer = () => {
     )
 
     return (
-        <>
-            <h2>Detalles del producto</h2>
-            <button className='btn btn-ghost' onClick={() => navigate(-1)}>Volver</button>
+        <section>
+            <h2 className="text-xl font-heading font-medium">Detalles del producto</h2>
+            <button className='btn btn-ghost btn-sm mt-1 normal-case font-medium' onClick={() => navigate(-1)}>Volver</button>
             <ItemDetail {...product} />
-        </>
+        </section>
     )
 }
 

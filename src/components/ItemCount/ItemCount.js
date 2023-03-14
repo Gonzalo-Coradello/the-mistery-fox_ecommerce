@@ -32,16 +32,16 @@ const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id}) => {
 
     return (
         <div className="w-full">
-            <div className="grid justify-center gap-4 lg:flex lg:justify-between">
-                <h3 className="text-lg font-semibold">Total: ${price * quantity}</h3>
-                <div className="flex gap-4 justify-center">
-                    <button onClick={decrement} className="btn btn-sm btn-ghost px-5 text-xl font-semibold">-</button>
-                    <h4 className="cursor-default text-xl font-normal">{quantity}</h4>
-                    <button onClick={increment} className="btn btn-sm btn-ghost px-5 text-xl font-semibold">+</button>
+            <div className="grid justify-center gap-2 lg:justify-between">
+                <div className="flex gap-4 justify-center items-center">
+                    <button onClick={decrement} className="btn btn-sm btn-ghost btn-square text-sm font-medium">-</button>
+                    <h4 className="cursor-default font-medium">{quantity}</h4>
+                    <button onClick={increment} className="btn btn-sm btn-ghost btn-square text-sm font-medium">+</button>
                 </div>
+                <h3 className="text-sm md:text-base font-medium w-max mx-auto">Total: ${price * quantity}</h3>
             </div>
             { !inCart && <div className="mx-auto mt-4">
-                <button onClick={() => validateStock(quantity)} className="btn btn-outline mt-3">Agregar al carrito</button>
+                <button onClick={() => validateStock(quantity)} className="btn btn-outline mt-3 normal-case">Agregar al carrito</button>
             </div> }
         </div>
     )

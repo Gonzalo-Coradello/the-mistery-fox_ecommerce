@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Item = ({ id, title, author, img, price }) => {
     return (
-        <div className="card border border-primary-color">
+        <div className="card border border-primary-color ">
             <figure>
                 <div className="h-80"><img className="h-full" src={img} alt={title} /></div>
             </figure>
@@ -11,7 +11,7 @@ const Item = ({ id, title, author, img, price }) => {
                 <h4 className="text-sm">{author}</h4>
                 <h4 className="text-sm">${price}</h4>
                 <div className="card-actions justify-center mt-4">
-                    <Link to={`/detail/${id}`} className="btn">Ver detalle</Link>
+                    <Link to={`/detail/${id}`} className="btn btn-outline normal-case">Ver detalle</Link>
                 </div>
             </div>
         </div>
