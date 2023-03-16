@@ -1,7 +1,7 @@
 # the mistery fox
 ## E-commerce
 
-_[en]_ **the mistery fox** is a book boutique which offers an unique experience. Get inspired and enjoy their incredible stories. Full-Stack e-commerce with user authentication.
+_[en]_ **the mistery fox** is a book boutique which offers an unique experience. Get inspired and enjoy their incredible stories. Full-Stack e-commerce with user authentication.  
 _[es]_ **the mistery fox** es una boutique de libros que ofrece una experiencia única. Inspirate y disfruta sus increíbles historias. E-commerce Full-Stack con autenticación.
 
 ## Status
@@ -39,7 +39,7 @@ In progress
 
 ## Created with:
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)   ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)  
- ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white) ![Mocha](https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white) ![Mocha](https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ## Backend
 https://github.com/Gonzalo-Coradello/backend-ecommerce
@@ -48,7 +48,7 @@ https://github.com/Gonzalo-Coradello/backend-ecommerce
 Coming soon
 
 ## Credits
-_[en]_ Branding, logo and design: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)
+_[en]_ Branding, logo and design: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)  
 _[es]_ Diseño, branding y logo: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)
 
 ## Screeenshots
