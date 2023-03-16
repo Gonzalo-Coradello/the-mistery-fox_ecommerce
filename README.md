@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# the mistery fox
+## E-commerce
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+_[en]_ **the mistery fox** is a book boutique which offers an unique experience. Get inspired and enjoy their incredible stories. Full-Stack e-commerce with user authentication.
+_[es]_ **the mistery fox** es una boutique de libros que ofrece una experiencia única. Inspirate y disfruta sus increíbles historias. E-commerce Full-Stack con autenticación.
 
-## Available Scripts
+## Status
+In progress
 
-In the project directory, you can run:
+## Features
+- Login/register functionality.
+- Authentication and Authorization with Passport and JWT.
+- Security measures.
+- Products fetched from MongoDB database.
+- Filter by category.
+- Fully functional cart.
+- Users, carts and orders get stored in the database.
+- Software arquitecture and design patterns.
+- Admin functionality. Admin can add new products and modify or delete existing ones.
+- Testing with Mocha and Chai.
+- Cloud deployment with Docker and Kubernetes.
+- Good user experience, polished design and attention to detail.
+- Completely responsive.
 
-### `npm start`
+## Características:
+- Registro de usuarios e inicio de sesión.
+- Autenticación y autorización con Passport y JWT.
+- Implementaciones de seguridad.
+- Acceso a los productos a través de base de datos de MongoDB.
+- Filtrado por categorías.
+- Funcionalidades de carrito completas.
+- Almacenamiento en base de datos de usuarios, carritos y compras.
+- Funciones de administrador. El administrador puede agregar productos nuevos y modificar o eliminar productos existentes.
+- Arquitectura de software y patrones de diseño.
+- Testing con Mocha y Chai.
+- Deploy en la nube con Docker y Kubernetes.
+- Buena experiencia de usuario, diseño cuidado y atención a los detalles.
+- Completamente responsive. Se adapta a todas las pantallas.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Created with:
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)   ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)  
+ ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white) ![Mocha](https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backend
+https://github.com/Gonzalo-Coradello/backend-ecommerce
 
-### `npm test`
+## Deploy
+Coming soon
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Credits
+_[en]_ Branding, logo and design: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)
+_[es]_ Diseño, branding y logo: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Screeenshots
+Coming soon
