@@ -24,3 +24,9 @@
     -ms-filter: blur(2.5px);
     filter: blur(2.5px);
 }
+
+.shadow-custom {
+    -webkit-box-shadow: 0 5px 4px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0 5px 4px 0px rgba(0,0,0,0.35);
+    box-shadow: 0 5px 4px 0px rgba(0,0,0,0.35);
+}
