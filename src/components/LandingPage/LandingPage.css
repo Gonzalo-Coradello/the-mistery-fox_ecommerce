@@ -1,0 +1,26 @@
+.booksBackground {
+    position: relative;
+    overflow: auto;
+}
+
+.booksBackground::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: url('/public/assets/books.jpg');
+    background-size: cover;
+    background-position: left;
+    background-blend-mode: darken;
+    width: 100%;
+    height: 100%;
+
+    -webkit-filter: blur(2.5px);
+    -moz-filter: blur(2.5px);
+    -o-filter: blur(2.5px);
+    -ms-filter: blur(2.5px);
+    filter: blur(2.5px);
+}
