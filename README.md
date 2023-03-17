@@ -52,4 +52,10 @@ _[en]_ Branding, logo and design: [Talia Laborde](https://www.linkedin.com/in/ta
 _[es]_ Diseño, branding y logo: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)
 
 ## Screeenshots
-Coming soon
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-1.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-2.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-3.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-4.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-5.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-6.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-7.jpg)
