@@ -5,19 +5,22 @@ import { BsStars, BsSearch } from 'react-icons/bs'
 import { FaTheaterMasks, FaRegCompass } from 'react-icons/fa'
 import { RiSpaceShipLine } from 'react-icons/ri'
 import { ImBooks } from 'react-icons/im'
+import { GiBlackBook, GiBookCover } from 'react-icons/gi'
+import batIcon from './assets/bat.png'
+import bearIcon from './assets/bear.png'
 
 const bookCategories = [
     { title: 'Romance', icon: <FiHeart size={35} /> },
     { title: 'Fantasía', icon: <BsStars size={35} /> },
-    { title: 'Terror', icon: <FiHeart size={35} /> },
+    { title: 'Terror', icon: <img src={batIcon} alt="Terror" /> },
     { title: 'Teatral', icon: <FaTheaterMasks size={35} /> },
     { title: 'Ciencia Ficción', icon: <RiSpaceShipLine size={35} /> },
     { title: 'Policial', icon: <BsSearch size={35} /> },
     { title: 'Aventura', icon: <FaRegCompass size={35} /> },
-    { title: 'Juvenil', icon: <FiHeart size={35} /> },
+    { title: 'Juvenil', icon: <img src={bearIcon} alt="Juvenil" /> },
     { title: 'Colecciones', icon: <ImBooks size={35} /> },
-    { title: 'Novelas', icon: <ImBooks size={35} /> },
-    { title: 'Cuentos y relatos', icon: <ImBooks size={35} /> }
+    { title: 'Novelas', icon: <GiBlackBook size={35} /> },
+    { title: 'Cuentos y relatos', icon: <GiBookCover size={35} /> }
 ]
 
 const Categories = () => {
