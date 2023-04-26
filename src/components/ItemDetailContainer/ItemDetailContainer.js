@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import ItemDetail from '../ItemDetail/ItemDetail'
 import Loader from "../Loader/Loader"
-import { getProduct } from "../../services/firebase/firestore/products"
+import { getOneProduct } from "../../services/axios/productService"
 import useAsync from "../../hooks/useAsync"
 
 const ItemDetailContainer = () => {
@@ -10,7 +10,7 @@ const ItemDetailContainer = () => {
     const { productId } = useParams()
     const navigate = useNavigate()
 
-    const getProductById = () => getProduct(productId)
+    const getProductById = () => getOneProduct(productId)
     const { data: product, error, loading } = useAsync(getProductById, [productId])
 
     useEffect(() => {

@@ -30,7 +30,7 @@ const Cart = () => {
         <section className="min-h-[85vh]">
             <h2 className="font-heading text-2xl font-medium mb-4">Carrito de compras</h2>
             <div>
-                { cart.map(prod => <CartItem key={prod.id} {...prod} /> ) }
+                { cart.map(prod => <CartItem key={prod._id} {...prod} /> ) }
             </div>
             <div className="flex justify-between items-center mx-auto w-11/12 lg:w-4/5 max-w-[850px]">
                 <button onClick={clearCart} className="btn btn-sm btn-ghost normal-case font-medium transition duration-300">Vaciar carrito</button>
