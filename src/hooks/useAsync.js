@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react"
 
-
 const useAsync = (asyncFn, dependencies = []) => {
     const [data, setData] = useState()
     const [error, setError] = useState()
     const [loading, setLoading] = useState(true)
+    const [prevPage, setPrevPage] = useState([])
+    const [nextPage, setNextPage] = useState([])
 
     if(!Array.isArray(dependencies)) {
         dependencies = []
     }
 
     useEffect(() => {
-
         setLoading(true)
 
         asyncFn()
             .then(data => {
-                setData(data)
+                setData(data.docs)
+                setPrevPage([data.hasPrevPage, data.prevPage])
+                setNextPage([data.hasNextPage, data.nextPage])
             })
             .catch(err => {
                 setError(err)
@@ -29,7 +31,9 @@ const useAsync = (asyncFn, dependencies = []) => {
         return {
             data,
             error,
-            loading
+            loading,
+            prevPage,
+            nextPage
         }
 }
 
