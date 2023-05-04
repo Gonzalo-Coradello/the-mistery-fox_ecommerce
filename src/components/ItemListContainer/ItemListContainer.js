@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ItemList from '../ItemList/ItemList'
 import Loader from "../Loader/Loader";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import useAsync from "../../hooks/useAsync";
 import { getProductsWithQueries } from "../../services/axios/productService";
@@ -9,19 +9,23 @@ import Categories from "../Categories/Categories";
 
 const ItemListContainer = () => {
 
-    const [ searchParams ] = useSearchParams()
+    const [ searchParams, setSearchParams ] = useSearchParams()
     const location = useLocation()
     const queries = location.search
     const page = searchParams.get('page')
     const category = searchParams.get('category')
 
     const getProducts = () => getProductsWithQueries(searchParams)
-    const { data: products, error, loading, prevPage, nextPage } = useAsync(getProducts, [searchParams])
+    const { data, error, loading, prevPage, nextPage } = useAsync(getProducts, [searchParams])
+    const products = data.docs
 
     useEffect(() => {
         document.title = 'Listado de productos'
     }, [])
 
+    const handleCategory = selectedCategory => {
+        setSearchParams({'category': selectedCategory})
+    }
 
     if(loading) return <Loader />
 
@@ -34,7 +38,7 @@ const ItemListContainer = () => {
 
     return (
         <section className="bg-base-100">
-            <Categories />
+            <Categories handleClick={handleCategory} />
             <h1 className="text-3xl mb-8 mt-8">Todos nuestros libros</h1>
             <ItemList products={products} />
             <div>

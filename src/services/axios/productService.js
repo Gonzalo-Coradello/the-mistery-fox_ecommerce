@@ -26,7 +26,7 @@ export const getProductsWithQueries = async (searchParams) => {
 
     const queries = Object.entries(options).map(subArr => subArr.join('=')).join('&')
 
-    const response = await axios.get(`${url_base}?${queries}`)
+    const response = queries === '' ? await axios.get(url_base) : await axios.get(`${url_base}?${queries}`)
     return response.data.payload
 }
 
