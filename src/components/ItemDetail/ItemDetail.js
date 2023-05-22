@@ -1,16 +1,15 @@
-import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"
 import ItemCount from "../ItemCount/ItemCount"
 import { NotificationContext } from "../../notification/NotificationService"
+import { CartContext } from "../../context/CartContext"
 
 const ItemDetail = ({ _id, title, author, category, description, thumbnails, price, stock }) => {
 
-    const { addItem } = useContext(CartContext)
     const { setNotification } = useContext(NotificationContext)
+    const { addItem } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {
-        const productToAdd = {_id, title, author, thumbnails, price, quantity, stock}
-        addItem(productToAdd, quantity)
+        addItem(_id, quantity)
         setNotification('success', '¡Producto añadido al carrito!')
     }
 

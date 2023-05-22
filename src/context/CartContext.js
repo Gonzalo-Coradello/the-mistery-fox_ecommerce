@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react"
+import { addProduct, deleteProduct, getCartProducts, clearCart as emptyCart, replaceQuantity } from "../services/axios/cartService"
 
 export const CartContext = createContext({
     cart: [],
@@ -9,91 +10,51 @@ export const CartProvider = ({children}) => {
     const [cart, setCart] = useState([])
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [total, setTotal] = useState(0)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const totalQty = getQuantity()
+        setLoading(true)
+        getCartProducts()
+            .then(data => setCart(data))
+            .finally(setLoading(false))
+    }, [])
+
+    useEffect(() => {
+        const totalQty = cart.reduce((acc, prod) => acc + prod.quantity, 0)
+        const total = cart.reduce((acc, prod) => acc + prod.product.price * prod.quantity, 0)
+
         setTotalQuantity(totalQty)
+        setTotal(total)
     }, [cart]) //eslint-disable-line
 
-    useEffect(() => {
-        const total = getTotal()
-        setTotal(total)
-      }, [cart]) //eslint-disable-line
-
-    const addItem = (productToAdd, quantity) => {
-        if(!isInCart(productToAdd.id)) {
-            productToAdd.quantity = quantity
-            setCart([...cart, productToAdd])
-        } else {
-            const cartUpdated = cart.map(prod => {
-                if(prod.id === productToAdd.id) {
-                    const productUpdated = {
-                        ...prod,
-                        quantity: prod.quantity += quantity
-                    }
-
-                    return productUpdated
-                } else {
-                    return prod
-                }
-            })
-
-            setCart(cartUpdated)
-        }
+    const addItem = async (pid, quantity) => {
+        const result = await addProduct(pid, quantity)
+        setCart(result)
     }
 
-    const isInCart = (id) => {
-        return cart.some(prod => prod.id === id)
-    }
-
-    const removeItem = (id) => {
-        const cartWithoutProduct = cart.filter(prod => prod.id !== id)
+    const removeItem = async (id) => {
+        const cartWithoutProduct = cart.filter(prod => prod.product._id !== id)
         setCart(cartWithoutProduct)
+        await deleteProduct(id)
     }
 
-    const getQuantity = () => {
-        let accu = 0
-
-        cart.forEach(prod => {
-            accu += prod.quantity
-        })
-
-        return accu
-    }
-
-    const getTotal = () => {
-        let accu = 0
-  
-        cart.forEach(prod => {
-            accu += prod.quantity * prod.price
-        })
-  
-        return accu
-    }
-
-    const clearCart = () => {
+    const clearCart = async () => {
         setCart([])
+        await emptyCart()
     }
 
-    const getProductQuantity = (id) => {
-        const product = cart.find(prod => prod.id === id)
-
-        return product?.quantity
-    }
-
-    const updateQuantityFromCart = (id, quantity) => {
-        const productToUpdate = cart.find(prod => prod.id === id)
-
+    const updateQuantityFromCart = async (id, quantity) => {
+        const productToUpdate = cart.find(({product}) => product._id === id)
         const updatedProd = {
             ...productToUpdate,
             quantity: quantity
         }
-
-        setCart(prevCart => prevCart.map(prod => prod.id === id ? updatedProd : prod))
+        setCart(prevCart => prevCart.map(prod => prod.product._id === id ? updatedProd : prod))
+        await replaceQuantity(id, quantity)
     }
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, isInCart, totalQuantity, total, clearCart, getProductQuantity, updateQuantityFromCart }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart, updateQuantityFromCart, loading }}>
             {children}
         </CartContext.Provider>
     )

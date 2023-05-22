@@ -1,15 +1,16 @@
+import ItemCount from "../ItemCount/ItemCount"
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
-import ItemCount from "../ItemCount/ItemCount"
 
-const CartItem = ({ _id, title, author, price, thumbnails, quantity, stock }) => {
+const CartItem = ({ quantity, product: { _id, title, author, price, thumbnails, stock } }) => {
 
+    const image = `${process.env.REACT_APP_urlBase}${thumbnails[0]}`
     const { removeItem } = useContext(CartContext)
 
     return (
         <div className="card card-side border flex rounded-md px-2 mx-2 lg:w-4/5 max-w-[850px] lg:mx-auto mb-4">
             <div className="rounded-md flex items-center py-2">
-                <img src={thumbnails[0]} alt={title} className="rounded-md max-h-36 max-w-[8rem] sm:max-w-full"></img>
+                <img src={image} alt={title} className="rounded-md max-h-36 max-w-[8rem] sm:max-w-full"></img>
             </div>
             <div className="sm:card-body justify-center md:gap-4  ">
                 <button onClick={() => removeItem(_id)} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

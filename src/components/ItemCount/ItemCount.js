@@ -16,11 +16,17 @@ const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id}) => {
     }, [stock])
 
     const increment = () => {
-        if(quantity < stock) setQuantity(prev => prev + 1)
+        if(quantity < currentStock) {
+            setQuantity(prev => prev + 1)
+            if(inCart) updateQuantityFromCart(id, quantity + 1)
+        }
     }
 
-    const decrement = () => {
-        if(quantity > 1) setQuantity(prev => prev - 1)
+    const decrement = async () => {
+        if(quantity > 1) {
+            setQuantity(prev => prev - 1)
+            if(inCart) updateQuantityFromCart(id, quantity - 1)
+        }
     }
 
     const validateStock = () => {

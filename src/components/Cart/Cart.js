@@ -1,11 +1,12 @@
-import { CartContext } from "../../context/CartContext";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CartItem from "../CartItem/CartItem"
 import { Link } from "react-router-dom";
+import Loader from "../Loader/Loader";
+import { CartContext } from "../../context/CartContext";
 
 const Cart = () => {
 
-    const { cart, clearCart, total } = useContext(CartContext)
+    const { cart, clearCart, total, loading } = useContext(CartContext)
     const [ isEmpty, setIsEmpty ] = useState(true)
 
     useEffect(() => {
@@ -15,6 +16,8 @@ const Cart = () => {
     useEffect(() => {
         cart.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
     }, [cart])
+
+    if(loading) return <Loader />
 
     if(isEmpty) return (
         <section className="h-[85vh]">
