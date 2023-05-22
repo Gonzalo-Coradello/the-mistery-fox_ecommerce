@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom"
 import CartWidget from "../CartWidget/CartWidget"
+import useAuth from "../../hooks/useAuth"
 
 
 const Navbar = () => {
 
     const location = useLocation()
-    const isLoggedIn = false
+    const { isLogged } = useAuth()
 
     return (
         <nav className={location.pathname === '/' ? 'text-secondary' : 'text-primary'}>
@@ -21,7 +22,7 @@ const Navbar = () => {
                         <li><Link to="#" className="text-left">contacto</Link></li>
                         <li><Link to="#" className="text-left">mi cuenta</Link></li>
                         { 
-                            isLoggedIn ? 
+                            isLogged ? 
                             <li><Link to="#" className="text-left">mi cuenta</Link></li> :
                             <>
                                 <li><Link to="#" className="text-left">iniciar sesión</Link></li>
@@ -37,7 +38,7 @@ const Navbar = () => {
                         <li><Link to="/books" className="btn btn-sm btn-ghost normal-case font-normal rounded-md">nuestros libros</Link></li>
                         <li><Link to="#" className="btn btn-sm btn-ghost normal-case font-normal rounded-md">contacto</Link></li>
                         { 
-                            isLoggedIn ? 
+                            isLogged ? 
                             <li><Link to="#" className="btn btn-sm btn-ghost normal-case font-normal rounded-md">mi cuenta</Link></li> :
                             <>
                                 <li><Link to="#" className="btn btn-sm btn-ghost normal-case font-normal rounded-md">iniciar sesión</Link></li>
@@ -45,7 +46,7 @@ const Navbar = () => {
                             </>
                         }
                     </ul>
-                    { isLoggedIn && <CartWidget />}
+                    { isLogged && <CartWidget />}
                 </div>
             </div>
         </nav>
