@@ -1,15 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import CartItem from "../CartItem/CartItem"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { CartContext } from "../../context/CartContext";
-import { purchase } from "../../services/axios/cartService";
-
+// import { purchase } from "../../services/axios/cartService";
 
 const Cart = () => {
 
-    const { cart, clearCart, total, loading } = useContext(CartContext)
+    const { cart, clearCart, total, loading, prepareCheckout } = useContext(CartContext)
     const [ isEmpty, setIsEmpty ] = useState(true)
+    const navigate = useNavigate()
+
+    console.log({cart})
 
     useEffect(() => {
         document.title = 'Carrito de compras'
@@ -18,6 +20,11 @@ const Cart = () => {
     useEffect(() => {
         cart.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
     }, [cart])
+
+    const handlePurchase = async () => {
+        await prepareCheckout()
+        navigate('/checkout')
+    }
 
     if(loading) return <Loader />
 
@@ -35,14 +42,13 @@ const Cart = () => {
         <section className="min-h-[85vh]">
             <h2 className="font-heading text-2xl font-medium mb-4">Carrito de compras</h2>
             <div>
-                { cart.map(prod => <CartItem key={prod._id} {...prod} /> ) }
+                { cart.length > 0 && cart.map(prod => <CartItem key={prod._id} {...prod} /> ) }
             </div>
             <div className="flex justify-between items-center mx-auto w-11/12 lg:w-4/5 max-w-[850px]">
                 <button onClick={clearCart} className="btn btn-sm btn-ghost normal-case font-medium transition duration-300">Vaciar carrito</button>
                 <h2 className="text-xl font-bold mr-8">Total: ${total}</h2>
             </div>
-            {/* <Link to='/checkout' className='btn btn-outline mt-4 normal-case transition duration-300'>Finalizar compra</Link>  */}
-            <button onClick={purchase} className='btn btn-outline mt-4 normal-case transition duration-300'>Finalizar compra</button> 
+            <button onClick={handlePurchase}>Finalizar compra</button>
         </section>
     )
 }

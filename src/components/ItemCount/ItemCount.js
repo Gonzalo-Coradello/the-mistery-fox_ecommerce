@@ -7,10 +7,7 @@ const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id}) => {
     const [currentStock, setCurrentStock] = useState()
     const { updateQuantityFromCart } = useContext(CartContext)
 
-    useEffect(() => {
-        if(inCart) updateQuantityFromCart(id, quantity)
-    }, [quantity]) // eslint-disable-line 
-
+    
     useEffect(() => {
         setCurrentStock(stock)
     }, [stock])

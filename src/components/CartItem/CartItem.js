@@ -4,8 +4,8 @@ import { CartContext } from "../../context/CartContext"
 
 const CartItem = ({ quantity, product: { _id, title, author, price, thumbnails, stock } }) => {
 
-    const image = `${process.env.REACT_APP_urlBase}${thumbnails[0]}`
     const { removeItem } = useContext(CartContext)
+    const image = `${process.env.REACT_APP_urlBase}${thumbnails[0]}`
 
     return (
         <div className="card card-side border flex rounded-md px-2 mx-2 lg:w-4/5 max-w-[850px] lg:mx-auto mb-4">

@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import ItemCount from "../ItemCount/ItemCount"
-import { NotificationContext } from "../../notification/NotificationService"
+import { NotificationContext } from "../../services/notification/NotificationService"
 import { CartContext } from "../../context/CartContext"
 
 const ItemDetail = ({ _id, title, author, category, description, thumbnails, price, stock }) => {
