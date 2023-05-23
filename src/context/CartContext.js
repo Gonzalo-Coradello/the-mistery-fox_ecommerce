@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react"
-import { addProduct, deleteProduct, getCartProducts, clearCart as emptyCart, replaceQuantity } from "../services/axios/cartService"
+import { addProduct, deleteProduct, getCartProducts, clearCart as emptyCart, replaceQuantity, purchase } from "../services/axios/cartService"
 
 export const CartContext = createContext({
     cart: [],
@@ -11,6 +11,9 @@ export const CartProvider = ({children}) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [total, setTotal] = useState(0)
     const [loading, setLoading] = useState(true)
+    const [preferenceId, setPreferenceId] = useState()
+    const [ticket, setTicket] = useState()
+    const [outOfStock, setOutOfStock] = useState()
 
     useEffect(() => {
         setLoading(true)
@@ -28,8 +31,11 @@ export const CartProvider = ({children}) => {
     }, [cart]) //eslint-disable-line
 
     const addItem = async (pid, quantity) => {
-        const result = await addProduct(pid, quantity)
+        setLoading(true)
+        await addProduct(pid, quantity)
+        const result = await getCartProducts()
         setCart(result)
+        setLoading(false)
     }
 
     const removeItem = async (id) => {
@@ -53,8 +59,15 @@ export const CartProvider = ({children}) => {
         await replaceQuantity(id, quantity)
     }
 
+    const prepareCheckout = async () => {
+        const { outOfStock, ticket, preferenceId } = await purchase()
+        setPreferenceId(preferenceId)
+        setTicket(ticket)
+        setOutOfStock(outOfStock)
+    }
+
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart, updateQuantityFromCart, loading }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart, updateQuantityFromCart, loading, prepareCheckout, preferenceId, ticket, outOfStock }}>
             {children}
         </CartContext.Provider>
     )
