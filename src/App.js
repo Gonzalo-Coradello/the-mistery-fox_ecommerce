@@ -4,7 +4,7 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import { CartProvider } from './context/CartContext';
 import Cart from './components/Cart/Cart';
-import { NotificationProvider } from './notification/NotificationService';
+import { NotificationProvider } from './services/notification/NotificationService';
 import Footer from './components/Footer/Footer';
 import CheckoutContainer from './components/CheckoutContainer/CheckoutContainer';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -12,7 +12,13 @@ import Register from './components/sessions/Register/Register';
 import Login from './components/sessions/Login/Login';
 import { ROLES } from './config/roles';
 import RequireAuth from './components/sessions/RequireAuth/RequireAuth';
+import { initMercadoPago } from '@mercadopago/sdk-react';
+import Success from './components/CheckoutStatus/Success';
+import Failure from './components/CheckoutStatus/Failure';
+import Pending from './components/CheckoutStatus/Pending';
 const { user, premium, admin } = ROLES
+
+initMercadoPago(process.env.REACT_APP_MP_testPublicKey)
 
 function App() {
   return (
@@ -40,6 +46,9 @@ function App() {
                     <Route element={<RequireAuth allowedRoles={[user, premium]} />} >
                       <Route path='/cart' element={<Cart />} />
                       <Route path='/checkout' element={<CheckoutContainer />} />
+                      <Route path='/checkout/success' element={<Success />} />
+                      <Route path='/checkout/failure' element={<Failure />} />
+                      <Route path='/checkout/pending' element={<Pending />} />
                     </Route>
                   </Route>
 
