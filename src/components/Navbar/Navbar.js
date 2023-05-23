@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom"
 import CartWidget from "../CartWidget/CartWidget"
 import useAuth from "../../hooks/useAuth"
 
-
 const Navbar = () => {
 
     const location = useLocation()

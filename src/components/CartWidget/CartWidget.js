@@ -1,14 +1,15 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
-import { useLocation, useNavigate } from "react-router-dom"
-import { CgShoppingCart } from 'react-icons/cg'
+import { useNavigate } from "react-router-dom"
 import { BsCart2 } from 'react-icons/bs'
+import Loader from "../Loader/Loader"
 
 const CartWidget = () => {
 
-    const { totalQuantity } = useContext(CartContext)
+    const { totalQuantity, loading } = useContext(CartContext)
     const navigate = useNavigate()
-    const location = useLocation()
+
+    if(loading) return <Loader text="" navbar={true} />
 
     if(totalQuantity >= 0) return(
         <div className="dropdown dropdown-end">
