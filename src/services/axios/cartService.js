@@ -35,6 +35,5 @@ export const clearCart = async () => {
 export const purchase = async () => {
   const user = await getCurrentUser()
   const response = await axios.post(`${url_base}/${user.payload.cart}/purchase`)
-  console.log(response)
-  return response.data
+  return response.data.payload
 }

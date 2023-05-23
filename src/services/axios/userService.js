@@ -2,8 +2,9 @@ import axios from "axios";
 const url_base = `${process.env.REACT_APP_urlBase}/api/sessions`
 axios.defaults.withCredentials = true
 
-export const register = () => {
-
+export const register = async (data) => {
+    const response = await axios.post(`${url_base}/register`, data)
+    return response.data
 }
 
 export const login = async (data) => {
