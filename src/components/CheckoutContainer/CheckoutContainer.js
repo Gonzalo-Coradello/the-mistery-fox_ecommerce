@@ -1,84 +1,25 @@
-import { useState, useEffect, useContext } from "react"
+import { useEffect, useContext } from "react"
 import { CartContext } from "../../context/CartContext"
-import { useNavigate } from "react-router-dom"
-import { createOrder } from "../../services/firebase/firestore/orders"
 import Checkout from '../Checkout/Checkout'
-import Form from "../Form/Form"
-import Loader from "../Loader/Loader"
+import { Wallet } from "@mercadopago/sdk-react";
 
 const CheckoutContainer = () => {
 
-    const [ loading, setLoading ] = useState(false)
-    const [ checkoutStatus, setCheckoutStatus ] = useState()
-    const [ orderId, setOrderId ] = useState()
-    const [ OutOfStockList, setOutOfStockList ] = useState()
-    const [ errorMsg, setErrorMsg ] = useState()
-    const { cart, total, clearCart, removeItem } = useContext(CartContext)
-    const navigate = useNavigate()
+    const { preferenceId, ticket, outOfStock } = useContext(CartContext)
 
     useEffect(() => {
         document.title = '¡Finalizá tu compra!'
     })
 
-    const handleCheckout = ({ name, email, phone }) => {
-        setLoading(true)
-        const cartMap = cart.map(prod => {
-            const { images: deletedImg, stock: deletedStock, selectedSize: deletedSize, ...restCart } = prod
-            return restCart
-        })
-
-        const order = {
-            client: {
-                name,
-                email,
-                phone
-            },
-            items: cartMap,
-            total: total,
-        }
-
-        createOrder(order, cart)
-            .then(res => {
-                if(Array.isArray(res)) {
-                    const outOfStock = res
-                    const idsArray = outOfStock.map(item => item.id)
-                    idsArray.forEach(item => removeItem(item))
-                    setCheckoutStatus('outOfStock')
-                    setOutOfStockList(outOfStock)
-                    setLoading(false)
-                } else {
-
-                    clearCart()
-
-                    // setTimeout(() => {
-                    //     navigate('/')
-                    // }, 5000)
-
-                    setCheckoutStatus('success')
-                    setLoading(false)
-                    setOrderId(res)
-                } 
-            })
-            .catch(error => {
-                setCheckoutStatus('error')
-                setErrorMsg(error.toString())
-                setLoading(false)
-            })       
-    }
-
-    if(loading) {
-        return <Loader text="Se está generando la orden" />
-    }
+    // if(loading) {
+    //     return <Loader text="Se está generando la orden" />
+    // }
 
     return (
         <section className="min-h-[85vh]">
             <h2 className="font-heading text-2xl font-bold border-b w-fit mx-auto pb-4 px-14">Checkout</h2>
-            <div>
-                { checkoutStatus ?
-                <Checkout checkoutStatus={checkoutStatus} orderId={orderId} OutOfStockList={OutOfStockList} errorMsg={errorMsg} /> :
-                <Form handleCheckout={handleCheckout} />
-                }
-            </div>
+            <Checkout ticket={ticket} outOfStock={outOfStock} />
+            <Wallet initialization={{ preferenceId, redirectMode: 'modal' }} />
         </section>
     )
     
