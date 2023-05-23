@@ -31,3 +31,10 @@ export const clearCart = async () => {
   const response = await axios.delete(`${url_base}/${user.payload.cart}`)
   return response.data
 }
+
+export const purchase = async () => {
+  const user = await getCurrentUser()
+  const response = await axios.post(`${url_base}/${user.payload.cart}/purchase`)
+  console.log(response)
+  return response.data
+}

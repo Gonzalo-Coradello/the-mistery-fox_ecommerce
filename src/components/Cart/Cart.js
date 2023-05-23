@@ -3,6 +3,8 @@ import CartItem from "../CartItem/CartItem"
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { CartContext } from "../../context/CartContext";
+import { purchase } from "../../services/axios/cartService";
+
 
 const Cart = () => {
 
@@ -39,7 +41,8 @@ const Cart = () => {
                 <button onClick={clearCart} className="btn btn-sm btn-ghost normal-case font-medium transition duration-300">Vaciar carrito</button>
                 <h2 className="text-xl font-bold mr-8">Total: ${total}</h2>
             </div>
-            <Link to='/checkout' className='btn btn-outline mt-4 normal-case transition duration-300'>Finalizar compra</Link> 
+            {/* <Link to='/checkout' className='btn btn-outline mt-4 normal-case transition duration-300'>Finalizar compra</Link>  */}
+            <button onClick={purchase} className='btn btn-outline mt-4 normal-case transition duration-300'>Finalizar compra</button> 
         </section>
     )
 }
