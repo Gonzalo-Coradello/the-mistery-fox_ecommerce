@@ -16,6 +16,8 @@ import { initMercadoPago } from '@mercadopago/sdk-react';
 import Success from './components/CheckoutStatus/Success';
 import Failure from './components/CheckoutStatus/Failure';
 import Pending from './components/CheckoutStatus/Pending';
+import { UserProvider } from './context/UserContext';
+import CurrentUser from './components/sessions/CurrentUser/CurrentUser';
 const { user, premium, admin } = ROLES
 
 initMercadoPago(process.env.REACT_APP_MP_testPublicKey)
@@ -24,43 +26,46 @@ function App() {
   return (
     <div className="App">
       <NotificationProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <header className="header">
-              <Navbar />
-            </header>
-            <main>
-                <Routes>
-                  {/* Public */}
-                  <Route path='/' element={<LandingPage />} />
-                  <Route path='/sessions/login' element={<Login />} />
-                  <Route path='/sessions/register' element={<Register />} />
-                  
-                  {/* Protected */}
-                  <Route element={<RequireAuth allowedRoles={[user, premium, admin]} />} >
+        <UserProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <header className="header">
+                <Navbar />
+              </header>
+              <main>
+                  <Routes>
+                    {/* Public */}
+                    <Route path='/' element={<LandingPage />} />
+                    <Route path='/sessions/login' element={<Login />} />
+                    <Route path='/sessions/register' element={<Register />} />
+                    
+                    {/* Protected */}
+                    <Route element={<RequireAuth allowedRoles={[user, premium, admin]} />} >
 
-                    <Route path='/books' element={<ItemListContainer />} />
-                    <Route path='/category/:categoryId' element={<ItemListContainer />} />
-                    <Route path='/detail/:productId' element={<ItemDetailContainer />} />
+                      <Route path='/books' element={<ItemListContainer />} />
+                      <Route path='/category/:categoryId' element={<ItemListContainer />} />
+                      <Route path='/detail/:productId' element={<ItemDetailContainer />} />
 
-                    <Route element={<RequireAuth allowedRoles={[user, premium]} />} >
-                      <Route path='/cart' element={<Cart />} />
-                      <Route path='/checkout' element={<CheckoutContainer />} />
-                      <Route path='/checkout/success' element={<Success />} />
-                      <Route path='/checkout/failure' element={<Failure />} />
-                      <Route path='/checkout/pending' element={<Pending />} />
+                      <Route element={<RequireAuth allowedRoles={[user, premium]} />} >
+                        <Route path='/cart' element={<Cart />} />
+                        <Route path='/checkout' element={<CheckoutContainer />} />
+                        <Route path='/checkout/success' element={<Success />} />
+                        <Route path='/checkout/failure' element={<Failure />} />
+                        <Route path='/checkout/pending' element={<Pending />} />
+                        <Route path='/sessions/user' element={<CurrentUser />} />
+                      </Route>
                     </Route>
-                  </Route>
 
-                  
-                  <Route path='*' element={ <h2>404 NOT FOUND</h2> } />
-                </Routes>
-            </main>
-            <footer>
-              <Footer />
-            </footer>
-          </BrowserRouter>
-        </CartProvider>
+                    
+                    <Route path='*' element={ <h2>404 NOT FOUND</h2> } />
+                  </Routes>
+              </main>
+              <footer>
+                <Footer />
+              </footer>
+            </BrowserRouter>
+          </CartProvider>
+        </UserProvider>
       </NotificationProvider>
     </div>
   );
