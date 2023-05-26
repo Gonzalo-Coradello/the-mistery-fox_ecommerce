@@ -1,19 +1,22 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaCopy } from 'react-icons/fa';
-import { NotificationContext } from "../../services/notification/NotificationService";
-import { useContext } from "react";
+import { useNotification } from "../../services/notification/NotificationService";
 
 const Success = ({orderId}) => {
 
-  const { setNotification } = useContext(NotificationContext)
+  const { setNotification } = useNotification()
+  const navigate = useNavigate()
 
   const handleCopy = () => {
       navigator.clipboard.writeText(orderId)
       setNotification('info', `Código copiado al portapapeles`)
   }
 
-  return (
-    <div className="mt-8 border border-primary-color p-12 grid gap-4 mx-4 max-w-[700px] lg:mx-auto">
+  console.log('OrderID: ', orderId)
+  if(!orderId) navigate('/cart')
+
+  if(orderId) return (
+    <section className="mt-8 border border-primary-color p-12 grid gap-4 mx-4 max-w-[700px] lg:mx-auto">
         <h2 className="text-2xl font-semibold mb-4">¡Muchas gracias!</h2>
         <p>Su orden ha sido generada exitosamente</p>
         <div>
@@ -23,7 +26,7 @@ const Success = ({orderId}) => {
             </p>
             <Link to='/' className='normal-case btn btn-outline mt-6'>Volver al inicio</Link>
         </div>
-    </div>
+    </section>
 )
 }
 

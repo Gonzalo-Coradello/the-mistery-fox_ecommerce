@@ -4,7 +4,7 @@ const Checkout = ({ ticket: { amount, items }, outOfStock }) => {
       <div>
         <h2>Resumen de la compra</h2>
         {items.map(item => (
-          <div>
+          <div key={item.id}>
             <p>
               {item.title} - {item.author}
             </p>
