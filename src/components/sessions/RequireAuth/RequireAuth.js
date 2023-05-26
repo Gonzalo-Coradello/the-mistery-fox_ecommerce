@@ -1,20 +1,22 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
 import Loader from "../../Loader/Loader";
+import { useSessionContext } from "../../../context/UserContext";
 
 const RequireAuth = ({ allowedRoles }) => {
     const location = useLocation()
-    const { loading, role } = useAuth()
+    const { user, loading, isLogged } = useSessionContext()
 
-    if(role === "pending") return <Loader />
+    if(loading) return <Loader />
 
+    console.log({ user, loading, isLogged })
+    
     const content = (
-        allowedRoles.includes(role)
+        isLogged && allowedRoles.includes(user.role)
             ? <Outlet />
             : <Navigate to="/sessions/login" state={{ from: location }} replace />
     )
 
-    if(!loading) return content
+    return content
 }
 
 export default RequireAuth

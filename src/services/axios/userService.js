@@ -27,3 +27,13 @@ export const getCurrentUser = async () => {
         return {status: "error", error}
     }
 }
+
+export const logout = async () => {
+    try {
+        const response = await axios.post(`${url_base}/logout`)
+        if(!response) return {status: "error", error: "Auth error"}
+        return response?.data
+    } catch(error) {
+        return {status: "error", error}
+    }
+}

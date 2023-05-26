@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { login } from "../../../services/axios/userService"
 import { useNavigate } from "react-router-dom";
+import { useSessionContext } from "../../../context/UserContext";
 
 const Login = () => {
 
+  const { loginWithEmail } = useSessionContext()
   const [formData, setFormData] = useState({email: "", password: ""})
   const navigate = useNavigate()
 
@@ -13,7 +14,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await login(formData)
+    await loginWithEmail(formData)
     navigate("/books")
   }
 
