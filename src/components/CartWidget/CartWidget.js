@@ -1,12 +1,11 @@
-import { useContext } from "react"
-import { CartContext } from "../../context/CartContext"
 import { useNavigate } from "react-router-dom"
 import { BsCart2 } from 'react-icons/bs'
 import Loader from "../Loader/Loader"
+import { useCartContext } from "../../context/CartContext"
 
 const CartWidget = () => {
 
-    const { totalQuantity, loading } = useContext(CartContext)
+    const { totalQuantity, loading } = useCartContext()
     const navigate = useNavigate()
 
     if(loading) return <Loader text="" navbar={true} />

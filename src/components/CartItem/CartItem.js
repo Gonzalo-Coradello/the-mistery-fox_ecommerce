@@ -1,10 +1,9 @@
+import { useCartContext } from "../../context/CartContext"
 import ItemCount from "../ItemCount/ItemCount"
-import { useContext } from "react"
-import { CartContext } from "../../context/CartContext"
 
 const CartItem = ({ quantity, product: { _id, title, author, price, thumbnails, stock } }) => {
 
-    const { removeItem } = useContext(CartContext)
+    const { removeItem } = useCartContext()
     const image = `${process.env.REACT_APP_urlBase}${thumbnails[0]}`
 
     return (

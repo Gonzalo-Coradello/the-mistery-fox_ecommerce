@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../../context/CartContext";
+import { useEffect, useState } from "react";
+import { useCartContext } from "../../context/CartContext";
 
 const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id}) => {
 
     const [quantity, setQuantity] = useState(initial)
     const [currentStock, setCurrentStock] = useState()
-    const { updateQuantityFromCart } = useContext(CartContext)
+    const { updateQuantityFromCart } = useCartContext()
 
     
     useEffect(() => {

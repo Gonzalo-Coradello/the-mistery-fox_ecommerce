@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import CartItem from "../CartItem/CartItem"
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
-import { CartContext } from "../../context/CartContext";
+import { useCartContext } from "../../context/CartContext";
 // import { purchase } from "../../services/axios/cartService";
 
 const Cart = () => {
 
-    const { cart, clearCart, total, loading, prepareCheckout } = useContext(CartContext)
+    const { cart, clearCart, total, loading, prepareCheckout } = useCartContext()
     const [ isEmpty, setIsEmpty ] = useState(true)
     const navigate = useNavigate()
 
