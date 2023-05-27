@@ -45,6 +45,7 @@ function App() {
                       <Route path='/books' element={<ItemListContainer />} />
                       <Route path='/category/:categoryId' element={<ItemListContainer />} />
                       <Route path='/detail/:productId' element={<ItemDetailContainer />} />
+                      <Route path='/sessions/user' element={<CurrentUser />} />
 
                       <Route element={<RequireAuth allowedRoles={[user, premium]} />} >
                         <Route path='/cart' element={<Cart />} />
@@ -52,7 +53,6 @@ function App() {
                         <Route path='/checkout/success' element={<Success />} />
                         <Route path='/checkout/failure' element={<Failure />} />
                         <Route path='/checkout/pending' element={<Pending />} />
-                        <Route path='/sessions/user' element={<CurrentUser />} />
                       </Route>
                     </Route>
 
