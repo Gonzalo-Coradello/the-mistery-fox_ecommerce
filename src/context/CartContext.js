@@ -1,12 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react'
-import {
-  addProduct,
-  deleteProduct,
-  getCartProducts,
-  clearCart as emptyCart,
-  replaceQuantity,
-  purchase,
-} from '../services/axios/cartService'
+import CartService from '../services/axios/cartService'
 import { useSessionContext } from './UserContext'
 
 export const CartContext = createContext({
@@ -28,7 +21,7 @@ export const CartProvider = ({ children }) => {
     if(isLogged && user.role !== 'admin') {
       console.log('Is logged? ', isLogged)
       setLoading(true)
-      getCartProducts()
+      CartService.getCartProducts()
         .then(data => setCart(data))
         .catch(error => console.log(error))
         .finally(setLoading(false))
@@ -48,8 +41,8 @@ export const CartProvider = ({ children }) => {
 
   const addItem = async (pid, quantity) => {
     setLoading(true)
-    await addProduct(pid, quantity)
-    const result = await getCartProducts()
+    await CartService.addProduct(pid, quantity)
+    const result = await CartService.getCartProducts()
     setCart(result)
     setLoading(false)
   }
@@ -57,12 +50,12 @@ export const CartProvider = ({ children }) => {
   const removeItem = async id => {
     const cartWithoutProduct = cart.filter(prod => prod.product._id !== id)
     setCart(cartWithoutProduct)
-    await deleteProduct(id)
+    await CartService.deleteProduct(id)
   }
 
   const clearCart = async () => {
     setCart([])
-    await emptyCart()
+    await CartService.emptyCart()
   }
 
   const updateQuantityFromCart = async (id, quantity) => {
@@ -74,11 +67,11 @@ export const CartProvider = ({ children }) => {
     setCart(prevCart =>
       prevCart.map(prod => (prod.product._id === id ? updatedProd : prod))
     )
-    await replaceQuantity(id, quantity)
+    await CartService.replaceQuantity(id, quantity)
   }
 
   const prepareCheckout = async () => {
-    const { outOfStock, ticket, preferenceId } = await purchase()
+    const { outOfStock, ticket, preferenceId } = await CartService.prepareCheckout()
     setPreferenceId(preferenceId)
     setTicket(ticket)
     setOutOfStock(outOfStock)

@@ -1,11 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import {
-  getCurrentUser,
-  login,
-  register,
-  githubLogin,
-  logout,
-} from '../services/axios/userService'
+import UserService from '../services/axios/userService'
 
 export const UserContext = createContext({
   user: null,
@@ -21,7 +15,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true)
-    getCurrentUser()
+    UserService.getCurrentUser()
       .then(data => {
         if (data.payload) {
           setIsLogged(true)
@@ -38,27 +32,27 @@ export const UserProvider = ({ children }) => {
       })
   }, [])
 
-  const getUser = async () => await getCurrentUser()
+  const getUser = async () => await UserService.getCurrentUser()
 
-  const registerUser = async data => await register(data)
+  const register = async data => await UserService.register(data)
 
   const loginWithEmail = async (email, password) => {
-    const data = await login(email, password)
+    const data = await UserService.login(email, password)
     setIsLogged(true)
     setUser(data.payload)
   }
 
   const loginWithGithub = async () => {
-    const result = await githubLogin()
+    const result = await UserService.githubLogin()
     setIsLogged(true)
     setUser(result)
     return result
   }
 
-  const logoutUser = () => {
+  const logout = () => {
     setIsLogged(false)
     setUser(null)
-    logout()
+    UserService.logout()
   }
 
   return (
@@ -69,10 +63,10 @@ export const UserProvider = ({ children }) => {
         loading,
         setLoading,
         getUser,
-        registerUser,
+        register,
         loginWithEmail,
         loginWithGithub,
-        logoutUser,
+        logout,
         firstRender,
       }}
     >

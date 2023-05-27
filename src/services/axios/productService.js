@@ -1,14 +1,13 @@
-import axios from "axios"
-
+import axios from 'axios'
 const url_base = `${process.env.REACT_APP_urlBase}/api/products`
 
-export const getProducts = async () => {
+export default class ProductService {
+  getProducts = async () => {
     const response = await axios.get(url_base)
     return response.data.payload
-}
+  }
 
-export const getProductsWithQueries = async (searchParams) => {
-
+  getProductsWithQueries = async searchParams => {
     const category = searchParams.get('category')
     const page = searchParams.get('page')
     const limit = searchParams.get('limit')
@@ -24,29 +23,34 @@ export const getProductsWithQueries = async (searchParams) => {
     sortOrder && (options.sortOrder = sortOrder)
     stock && (options.stock = stock)
 
-    const queries = Object.entries(options).map(subArr => subArr.join('=')).join('&')
+    const queries = Object.entries(options)
+      .map(subArr => subArr.join('='))
+      .join('&')
 
-    const response = queries === '' ? await axios.get(url_base) : await axios.get(`${url_base}?${queries}`)
+    const response =
+      queries === ''
+        ? await axios.get(url_base)
+        : await axios.get(`${url_base}?${queries}`)
     return response.data.payload
-}
+  }
 
-
-export const getOneProduct = async id => {
+  getOneProduct = async id => {
     const response = await axios.get(`${url_base}/${id}`)
     return response.data.payload
-}
+  }
 
-export const createProduct = async data => {
+  createProduct = async data => {
     const response = await axios.post(url_base, data)
     return response.data.payload
-}
+  }
 
-export const updateProduct = async (id, data) => {
+  updateProduct = async (id, data) => {
     const response = await axios.put(`${url_base}/${id}`, data)
     return response.data.payload
-}
+  }
 
-export const deleteProduct = async id => {
+  deleteProduct = async id => {
     const response = await axios.delete(`${url_base}/${id}`)
     return response.data.payload
+  }
 }
