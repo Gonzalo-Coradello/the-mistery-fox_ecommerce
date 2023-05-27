@@ -47,9 +47,9 @@ export default class Cart {
     return response.data.payload
   }
   
-  finishCheckout = async () => {
+  finishCheckout = async (items) => {
     const user = await getUser()
-    const response = await axios.post(`${url_base}/${user.payload.cart}/prepareCheckout`)
+    const response = await axios.post(`${url_base}/${user.payload.cart}/finishCheckout`, items)
     return response.data.payload
   }
 }

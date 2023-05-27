@@ -5,19 +5,19 @@ import { useCartContext } from '../../context/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
 
 const CheckoutContainer = () => {
-  const { preferenceId, items, outOfStock } = useCartContext()
+  const { preferenceId, items, outOfStock, finishCheckout } = useCartContext()
   const navigate = useNavigate()
-  const amount = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  )
+  const amount = items.reduce((acc, item) => acc + item.price * item.quantity, 0)
 
-  console.log('PreferenceID: ', preferenceId)
   if (!preferenceId) navigate('/cart')
 
   useEffect(() => {
     document.title = '¡Finalizá tu compra!'
   })
+
+  const handlePurchase = async () => {
+    await finishCheckout(items)
+  }
 
   if (outOfStock)
     return (
@@ -44,7 +44,9 @@ const CheckoutContainer = () => {
         </h2>
         <Checkout items={items} amount={amount} />
         {!outOfStock && (
-          <Wallet initialization={{ preferenceId, redirectMode: 'modal' }} />
+          <button onClick={handlePurchase}>
+            <Wallet initialization={{ preferenceId, redirectMode: 'modal' }} />
+          </button>
         )}
       </section>
     )

@@ -21,7 +21,6 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     if(isLogged && user.role !== 'admin') {
-      console.log('Is logged? ', isLogged)
       setLoading(true)
       cartService.getCartProducts()
         .then(data => setCart(data))
@@ -79,10 +78,9 @@ export const CartProvider = ({ children }) => {
     setOutOfStock(outOfStock)
   }
 
-  const finishCheckout = async () => {
+  const finishCheckout = async (items) => {
     setLoading(true)
-    const ticket = await cartService.finishCheckout()
-    console.log(ticket)
+    const ticket = await cartService.finishCheckout(items)
     setTicket(ticket)
     setLoading(false)
   }

@@ -8,8 +8,6 @@ const RequireAuth = ({ allowedRoles }) => {
 
   if (loading) return <Loader />
 
-  console.log({ user, loading, isLogged })
-
   const content =
     isLogged && allowedRoles.includes(user.role) 
     ? <Outlet />

@@ -9,8 +9,6 @@ const Cart = () => {
   const [isEmpty, setIsEmpty] = useState(true)
   const navigate = useNavigate()
 
-  console.log({ cart })
-
   useEffect(() => {
     document.title = 'Carrito de compras'
   })

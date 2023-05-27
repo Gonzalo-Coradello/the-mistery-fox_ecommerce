@@ -12,7 +12,6 @@ export const UserProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false)
   const [loading, setLoading] = useState(true)
   const [firstRender, setFirstRender] = useState(true)
-  console.log('STATE: ', { user, isLogged, loading })
 
   useEffect(() => {
     setLoading(true)
