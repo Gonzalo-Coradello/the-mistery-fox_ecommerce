@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from 'react'
-import CartService from '../services/axios/cartService'
+import Cart from '../services/axios/cartService'
 import { useSessionContext } from './UserContext'
+const cartService = new Cart()
 
 export const CartContext = createContext({
   cart: [],
@@ -13,6 +14,7 @@ export const CartProvider = ({ children }) => {
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
   const [preferenceId, setPreferenceId] = useState()
+  const [items, setItems] = useState()
   const [ticket, setTicket] = useState()
   const [outOfStock, setOutOfStock] = useState()
   const { isLogged, user } = useSessionContext()
@@ -21,7 +23,7 @@ export const CartProvider = ({ children }) => {
     if(isLogged && user.role !== 'admin') {
       console.log('Is logged? ', isLogged)
       setLoading(true)
-      CartService.getCartProducts()
+      cartService.getCartProducts()
         .then(data => setCart(data))
         .catch(error => console.log(error))
         .finally(setLoading(false))
@@ -41,8 +43,8 @@ export const CartProvider = ({ children }) => {
 
   const addItem = async (pid, quantity) => {
     setLoading(true)
-    await CartService.addProduct(pid, quantity)
-    const result = await CartService.getCartProducts()
+    await cartService.addProduct(pid, quantity)
+    const result = await cartService.getCartProducts()
     setCart(result)
     setLoading(false)
   }
@@ -50,12 +52,12 @@ export const CartProvider = ({ children }) => {
   const removeItem = async id => {
     const cartWithoutProduct = cart.filter(prod => prod.product._id !== id)
     setCart(cartWithoutProduct)
-    await CartService.deleteProduct(id)
+    await cartService.deleteProduct(id)
   }
 
   const clearCart = async () => {
     setCart([])
-    await CartService.emptyCart()
+    await cartService.emptyCart()
   }
 
   const updateQuantityFromCart = async (id, quantity) => {
@@ -67,14 +69,22 @@ export const CartProvider = ({ children }) => {
     setCart(prevCart =>
       prevCart.map(prod => (prod.product._id === id ? updatedProd : prod))
     )
-    await CartService.replaceQuantity(id, quantity)
+    await cartService.replaceQuantity(id, quantity)
   }
 
   const prepareCheckout = async () => {
-    const { outOfStock, ticket, preferenceId } = await CartService.prepareCheckout()
+    const { outOfStock, items, preferenceId } = await cartService.prepareCheckout()
     setPreferenceId(preferenceId)
-    setTicket(ticket)
+    setItems(items)
     setOutOfStock(outOfStock)
+  }
+
+  const finishCheckout = async () => {
+    setLoading(true)
+    const ticket = await cartService.finishCheckout()
+    console.log(ticket)
+    setTicket(ticket)
+    setLoading(false)
   }
 
   return (
@@ -89,7 +99,9 @@ export const CartProvider = ({ children }) => {
         updateQuantityFromCart,
         loading,
         prepareCheckout,
+        finishCheckout,
         preferenceId,
+        items,
         ticket,
         outOfStock,
       }}

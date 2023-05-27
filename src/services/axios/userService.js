@@ -2,7 +2,7 @@ import axios from 'axios'
 const url_base = `${process.env.REACT_APP_urlBase}/api/sessions`
 axios.defaults.withCredentials = true
 
-export default class UserService {
+export default class User {
   register = async data => {
     const response = await axios.post(`${url_base}/register`, data)
     return response.data

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import UserService from '../services/axios/userService'
+import User from '../services/axios/userService'
+const userService = new User()
 
 export const UserContext = createContext({
   user: null,
@@ -15,7 +16,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true)
-    UserService.getCurrentUser()
+    userService.getCurrentUser()
       .then(data => {
         if (data.payload) {
           setIsLogged(true)
@@ -32,18 +33,18 @@ export const UserProvider = ({ children }) => {
       })
   }, [])
 
-  const getUser = async () => await UserService.getCurrentUser()
+  const getUser = async () => await userService.getCurrentUser()
 
-  const register = async data => await UserService.register(data)
+  const register = async data => await userService.register(data)
 
   const loginWithEmail = async (email, password) => {
-    const data = await UserService.login(email, password)
+    const data = await userService.login(email, password)
     setIsLogged(true)
     setUser(data.payload)
   }
 
   const loginWithGithub = async () => {
-    const result = await UserService.githubLogin()
+    const result = await userService.githubLogin()
     setIsLogged(true)
     setUser(result)
     return result
@@ -52,7 +53,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setIsLogged(false)
     setUser(null)
-    UserService.logout()
+    userService.logout()
   }
 
   return (

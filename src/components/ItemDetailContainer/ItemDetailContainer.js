@@ -2,14 +2,15 @@ import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import Loader from '../Loader/Loader'
-import UserService from '../../services/axios/userService'
 import useAsync from '../../hooks/useAsync'
+import Product from '../../services/axios/productService'
+const productService = new Product()
 
 const ItemDetailContainer = () => {
   const { productId } = useParams()
   const navigate = useNavigate()
 
-  const getProductById = () => UserService.getOneProduct(productId)
+  const getProductById = () => productService.getOneProduct(productId)
   const { data: product, error, loading } = useAsync(getProductById, [productId])
 
   useEffect(() => {

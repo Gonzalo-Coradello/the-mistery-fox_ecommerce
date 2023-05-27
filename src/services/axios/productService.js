@@ -1,7 +1,7 @@
 import axios from 'axios'
 const url_base = `${process.env.REACT_APP_urlBase}/api/products`
 
-export default class ProductService {
+export default class Product {
   getProducts = async () => {
     const response = await axios.get(url_base)
     return response.data.payload

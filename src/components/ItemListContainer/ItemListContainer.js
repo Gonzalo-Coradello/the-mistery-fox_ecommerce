@@ -4,8 +4,9 @@ import Loader from '../Loader/Loader'
 import { Link, useLocation } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
-import UserService from '../../services/axios/userService'
 import Categories from '../Categories/Categories'
+import Product from '../../services/axios/productService'
+const productService = new Product()
 
 const ItemListContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -14,7 +15,7 @@ const ItemListContainer = () => {
   const page = searchParams.get('page')
   const category = searchParams.get('category')
 
-  const getProducts = () => UserService.getProductsWithQueries(searchParams)
+  const getProducts = () => productService.getProductsWithQueries(searchParams)
   const { data, error, loading, prevPage, nextPage } = useAsync(getProducts, [
     searchParams,
   ])
