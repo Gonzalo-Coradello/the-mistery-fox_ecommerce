@@ -1,6 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { FaCopy } from 'react-icons/fa';
 import { useNotification } from "../../services/notification/NotificationService";
+import { useEffect } from "react";
 
 const Success = () => {
 
@@ -16,9 +17,11 @@ const Success = () => {
     setNotification('info', `Código copiado al portapapeles`)
   }
 
-  if(!preferenceId || !status) navigate('/cart')
+  useEffect(() => {
+    if(!preferenceId || !status) navigate('/cart')
+  })
 
-  return (
+  if(preferenceId && status === 'approved') return (
     <section>
         <div className="border border-primary-color p-12 grid gap-4 mx-4 mt-8 max-w-[700px] lg:mx-auto">
           <h2 className="text-2xl font-semibold mb-4">¡Muchas gracias!</h2>
