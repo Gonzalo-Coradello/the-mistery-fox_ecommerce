@@ -39,6 +39,11 @@ export const CartProvider = ({ children }) => {
     setTotal(total)
   }, [cart]) //eslint-disable-line
 
+  const getCartProducts = async () => {
+    const cart = await cartService.getCartProducts()
+    setCart(cart)
+  }
+
   const addItem = async (pid, quantity) => {
     setLoading(true)
     await cartService.addProduct(pid, quantity)
@@ -83,6 +88,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cart,
+        getCartProducts,
         addItem,
         removeItem,
         totalQuantity,

@@ -6,36 +6,42 @@ import { Link, useNavigate } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 
 const CheckoutContainer = () => {
-  const { preferenceId, items, outOfStock } = useCartContext()
+  const { preferenceId, items, outOfStock, getCartProducts } = useCartContext()
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
-  const amount = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  )
-
-  if (!preferenceId) navigate('/cart')
 
   useEffect(() => {
     document.title = '¡Finalizá tu compra!'
   })
 
+  useEffect(() => {
+    const fn = async () => await getCartProducts()
+    if(outOfStock) fn()
+  }, []) // eslint-disable-line
+  
   if (outOfStock)
     return (
-      <div>
+      <section>
         <h2 className='text-2xl font-semibold mb-4'>
           Los siguientes productos se encuentran fuera de stock:
         </h2>
         {outOfStock.map(prod => (
-          <ul key={prod._id}>
+          <ul key={prod.id}>
             <li className='list-disc text-lg font-semibold'>
               {prod.title} <span className='font-light'>({prod.author})</span>
             </li>
           </ul>
         ))}
         <Link to='/cart'>Volver al carrito</Link>
-      </div>
+      </section>
     )
+  
+  if (!preferenceId) navigate('/cart')
+  
+  const amount = items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  )
 
   if (preferenceId)
     return (
