@@ -15,7 +15,6 @@ export const CartProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [preferenceId, setPreferenceId] = useState()
   const [items, setItems] = useState()
-  const [ticket, setTicket] = useState()
   const [outOfStock, setOutOfStock] = useState()
   const { isLogged, user } = useSessionContext()
 
@@ -56,7 +55,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = async () => {
     setCart([])
-    await cartService.emptyCart()
+    await cartService.clearCart()
   }
 
   const updateQuantityFromCart = async (id, quantity) => {
@@ -71,17 +70,12 @@ export const CartProvider = ({ children }) => {
     await cartService.replaceQuantity(id, quantity)
   }
 
-  const prepareCheckout = async () => {
-    const { outOfStock, items, preferenceId } = await cartService.prepareCheckout()
+  const purchase = async () => {
+    setLoading(true)
+    const { outOfStock, items, preferenceId } = await cartService.purchase()
     setPreferenceId(preferenceId)
     setItems(items)
     setOutOfStock(outOfStock)
-  }
-
-  const finishCheckout = async (items) => {
-    setLoading(true)
-    const ticket = await cartService.finishCheckout(items)
-    setTicket(ticket)
     setLoading(false)
   }
 
@@ -96,11 +90,9 @@ export const CartProvider = ({ children }) => {
         clearCart,
         updateQuantityFromCart,
         loading,
-        prepareCheckout,
-        finishCheckout,
+        purchase,
         preferenceId,
         items,
-        ticket,
         outOfStock,
       }}
     >

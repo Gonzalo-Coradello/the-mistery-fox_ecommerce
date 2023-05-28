@@ -37,19 +37,7 @@ export default class Cart {
   
   purchase = async () => {
     const user = await getUser()
-    const response = await axios.post(`${url_base}/${user.payload.cart}/purchase`)
-    return response.data.payload
-  }
-  
-  prepareCheckout = async () => {
-    const user = await getUser()
-    const response = await axios.post(`${url_base}/${user.payload.cart}/prepareCheckout`)
-    return response.data.payload
-  }
-  
-  finishCheckout = async (items) => {
-    const user = await getUser()
-    const response = await axios.post(`${url_base}/${user.payload.cart}/finishCheckout`, items)
+    const response = await axios.post(`${url_base}/${user.payload.cart}/checkout`)
     return response.data.payload
   }
 }

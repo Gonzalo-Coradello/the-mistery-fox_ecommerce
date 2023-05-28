@@ -5,7 +5,7 @@ import Loader from '../Loader/Loader'
 import { useCartContext } from '../../context/CartContext'
 
 const Cart = () => {
-  const { cart, clearCart, total, loading, prepareCheckout } = useCartContext()
+  const { cart, clearCart, total, loading, purchase } = useCartContext()
   const [isEmpty, setIsEmpty] = useState(true)
   const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ const Cart = () => {
   }, [cart])
 
   const handlePurchase = async () => {
-    await prepareCheckout()
+    await purchase()
     navigate('/checkout')
   }
 
