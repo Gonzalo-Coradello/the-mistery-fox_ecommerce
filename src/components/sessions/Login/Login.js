@@ -7,7 +7,7 @@ import GhostButton from '../../Buttons/GhostButton'
 import GhostLink from '../../Buttons/GhostLink'
 
 const Login = () => {
-  const { loginWithEmail } = useSessionContext()
+  const { loginWithEmail, loginWithGithub } = useSessionContext()
   const [formData, setFormData] = useState({ email: '', password: '' })
   const { setNotification } = useNotification()
   const navigate = useNavigate()
@@ -19,6 +19,18 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     const response = await loginWithEmail(formData)
+    if(response.status !== 'success')  {
+      setNotification('error', 'Ha ocurrido un error')
+      return
+    }
+    const { first_name, last_name } = response.payload
+    setNotification('success', `Iniciaste sesión como ${first_name} ${last_name}`)
+    navigate('/books')
+  }
+
+  const handleGithubLogin = async e => {
+    e.preventDefault()
+    const response = await loginWithGithub(formData)
     if(response.status !== 'success')  {
       setNotification('error', 'Ha ocurrido un error')
       return
@@ -71,7 +83,7 @@ const Login = () => {
         </GhostLink>
       </p>
 
-      <GhostButton classes='mt-4 font-semibold'>
+      <GhostButton handleClick={handleGithubLogin} classes='mt-4 font-semibold'>
         Ingresar con Github
         <svg
           aria-hidden='true'
