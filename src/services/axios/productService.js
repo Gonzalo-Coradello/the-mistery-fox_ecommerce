@@ -11,16 +11,16 @@ export default class Product {
     const category = searchParams.get('category')
     const page = searchParams.get('page')
     const limit = searchParams.get('limit')
-    const sortQuery = searchParams.get('sortQuery')
-    const sortOrder = searchParams.get('sortOrder')
+    const sort = searchParams.get('sort')
+    const sort_order = searchParams.get('sort_order')
     const stock = searchParams.get('stock')
 
     const options = {}
     category && (options.category = category)
     page && (options.page = page)
     limit && (options.limit = limit)
-    sortQuery && (options.sortQuery = sortQuery)
-    sortOrder && (options.sortOrder = sortOrder)
+    sort && (options.sort = sort)
+    sort_order && (options.sort_order = sort_order)
     stock && (options.stock = stock)
 
     const queries = Object.entries(options)

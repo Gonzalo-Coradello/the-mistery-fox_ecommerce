@@ -13,7 +13,6 @@ const ItemListContainer = () => {
   const location = useLocation()
   const queries = location.search
   const page = searchParams.get('page')
-  const category = searchParams.get('category')
 
   const getProducts = () => productService.getProductsWithQueries(searchParams)
   const { data, error, loading, prevPage, nextPage } = useAsync(getProducts, [
@@ -55,7 +54,7 @@ const ItemListContainer = () => {
             to={
               page
                 ? queries.replace(`page=${page}`, `page=${nextPage[1]}`)
-                : category
+                : queries
                 ? `${queries.concat(`&page=${nextPage[1]}`)}`
                 : `${queries.concat(`?page=${nextPage[1]}`)}`
             }
