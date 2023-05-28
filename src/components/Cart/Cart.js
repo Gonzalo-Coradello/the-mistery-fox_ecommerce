@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import CartItem from '../CartItem/CartItem'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import LinkButton from '../Buttons/LinkButton'
 import Loader from '../Loader/Loader'
 import { useCartContext } from '../../context/CartContext'
+import Button from '../Buttons/Button'
+import GhostButton from '../Buttons/GhostButton'
 
 const Cart = () => {
   const { cart, clearCart, total, loading, purchase } = useCartContext()
@@ -30,9 +33,7 @@ const Cart = () => {
         <h2>Carrito de compras</h2>
         <div>
           <h2>El carrito está vacío</h2>
-          <Link to='/books' className='btn btn-outline mt-4 normal-case'>
-            Comenzá a agregar productos
-          </Link>
+          <LinkButton url='/books'>Comenzá a agregar productos</LinkButton>
         </div>
       </section>
     )
@@ -47,15 +48,14 @@ const Cart = () => {
           cart.map(prod => <CartItem key={prod._id} {...prod} />)}
       </div>
       <div className='flex justify-between items-center mx-auto w-11/12 lg:w-4/5 max-w-[850px]'>
-        <button
-          onClick={clearCart}
-          className='btn btn-sm btn-ghost normal-case font-medium transition duration-300'
-        >
+        <GhostButton
+          handleClick={clearCart}
+          classses='transition duration-300'>
           Vaciar carrito
-        </button>
+        </GhostButton>
         <h2 className='text-xl font-bold mr-8'>Total: ${total}</h2>
       </div>
-      <button onClick={handlePurchase}>Finalizar compra</button>
+      <Button onClick={handlePurchase}>Finalizar compra</Button>
     </section>
   )
 }

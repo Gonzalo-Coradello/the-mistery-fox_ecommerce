@@ -1,25 +1,24 @@
-import { useNavigate } from 'react-router-dom'
 import { BsCart2 } from 'react-icons/bs'
 import Loader from '../Loader/Loader'
 import { useCartContext } from '../../context/CartContext'
+import GhostLink from '../Buttons/GhostLink'
 
 const CartWidget = () => {
   const { totalQuantity, loading } = useCartContext()
-  const navigate = useNavigate()
 
   if (loading) return <Loader text='' spinner={true} />
 
   if (totalQuantity >= 0)
     return (
-      <div className='dropdown dropdown-end'>
-        <label onClick={() => navigate('/cart')} tabIndex={0} className='btn btn-ghost btn-circle' >
+      <div>
+        <GhostLink url='/cart' rounded={true} classes='btn-md' >
           <div className='indicator'>
             <BsCart2 size={28} />
             <span className='badge badge-sm indicator-item'>
               {totalQuantity}
             </span>
           </div>
-        </label>
+        </GhostLink>
       </div>
     )
 }

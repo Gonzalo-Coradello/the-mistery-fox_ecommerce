@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useCartContext } from '../../context/CartContext'
+import Button from '../Buttons/Button'
+import GhostButton from '../Buttons/GhostButton'
 
 const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id }) => {
   const [quantity, setQuantity] = useState(initial)
@@ -33,34 +35,29 @@ const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id }) => {
 
   return (
     <div className='w-full'>
-      <div className='grid justify-center gap-2 lg:justify-between'>
+      <div
+        className={`flex justify-center items-center gap-2 lg:justify-between ${
+          inCart ? 'flex-col' : null
+        }`}>
         <div className='flex gap-4 justify-center items-center'>
-          <button
-            onClick={decrement}
-            className='btn btn-sm btn-ghost btn-square text-sm font-medium'
-          >
-            -
-          </button>
-          <h4 className='cursor-default font-medium'>{quantity}</h4>
-          <button
-            onClick={increment}
-            className='btn btn-sm btn-ghost btn-square text-sm font-medium'
-          >
-            +
-          </button>
+          <GhostButton handleClick={decrement} square={true} >-</GhostButton>
+          <h4 className='cursor-default font-medium text-sm sm:text-base'>
+            {quantity}
+          </h4>
+          <GhostButton handleClick={increment} square={true} >+</GhostButton>
         </div>
-        <h3 className='text-sm md:text-base font-medium w-max mx-auto'>
+        <h3
+          className={`text-sm md:text-base font-medium ${
+            inCart ? 'w-max mx-auto' : 'w-fit ml-auto'
+          }`}>
           Total: ${price * quantity}
         </h3>
       </div>
       {!inCart && (
-        <div className='mx-auto mt-4'>
-          <button
-            onClick={() => validateStock(quantity)}
-            className='btn btn-outline mt-3 normal-case'
-          >
+        <div className='mx-auto'>
+          <Button handleClick={() => validateStock(quantity)}>
             Agregar al carrito
-          </button>
+          </Button>
         </div>
       )}
     </div>

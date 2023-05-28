@@ -5,7 +5,7 @@ import { Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/autoplay'
 import { BsSearch } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import LinkButton from '../Buttons/LinkButton'
 
 const books = [
   { title: 'El Principito', src: '/images/saint-exupery_el-principito.png' },
@@ -88,12 +88,12 @@ const LandingPage = () => {
             ))}
           </Swiper>
         </div>
-        <Link
-          to='/books'
-          className='btn btn-secondary btn-outline w-fit normal-case mt-8 grid ml-auto transition duration-500'
+        <LinkButton
+          url='/books'
+          classes='btn-secondary min-w-max mt-8 grid ml-auto'
         >
           Ver toda la colección
-        </Link>
+        </LinkButton>
       </div>
     </section>
   )

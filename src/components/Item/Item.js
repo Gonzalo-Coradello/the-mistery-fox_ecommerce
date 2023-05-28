@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import LinkButton from '../Buttons/LinkButton'
 
 const Item = ({ _id, title, author, thumbnails, price }) => {
   return (
@@ -16,10 +16,10 @@ const Item = ({ _id, title, author, thumbnails, price }) => {
         <h2 className='card-title text-xl font-bold mx-auto'>{title}</h2>
         <h4 className='text-sm'>{author}</h4>
         <h4 className='text-sm'>${price}</h4>
-        <div className='card-actions justify-center mt-4'>
-          <Link to={`/detail/${_id}`} className='btn btn-outline normal-case'>
+        <div className='card-actions justify-center'>
+          <LinkButton url={ `/detail/${_id}` }>
             Ver detalle
-          </Link>
+          </LinkButton>
         </div>
       </div>
     </div>

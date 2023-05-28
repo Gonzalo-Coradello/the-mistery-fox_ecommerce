@@ -21,10 +21,10 @@ const ItemDetail = ({
   }
 
   return (
-    <div className='card lg:card-side gap-4 w-4/5 mx-auto mt-4'>
-      <div className='max-h-[500px] flex justify-center basis-1/2'>
+    <div className='card lg:card-side gap-4 w-4/5 px-4 lg:w-full xl:w-4/5 mx-auto mt-4'>
+      <div className=' flex justify-center basis-1/2'>
         <img
-          className='object-cover h-full rounded-xl mt-6'
+          className='object-contain max-h-[500px] rounded-xl mt-6'
           src={`${process.env.REACT_APP_urlBase}${thumbnails[0]}`}
           alt={title}
         />

@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import ItemList from '../ItemList/ItemList'
 import Loader from '../Loader/Loader'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import Categories from '../Categories/Categories'
 import Product from '../../services/axios/productService'
+import LinkButton from '../Buttons/LinkButton'
 const productService = new Product()
 
 const ItemListContainer = () => {
@@ -43,15 +44,15 @@ const ItemListContainer = () => {
       <Categories handleClick={handleCategory} />
       <h1 className='text-3xl mb-8 mt-8'>Todos nuestros libros</h1>
       <ItemList products={products} />
-      <div>
+      <div className='space-x-8 mt-4'>
         {prevPage[0] && (
-          <Link to={queries.replace(`page=${page}`, `page=${prevPage[1]}`)}>
+          <LinkButton url={queries.replace(`page=${page}`, `page=${prevPage[1]}`)}>
             Anterior
-          </Link>
+          </LinkButton>
         )}
         {nextPage[0] && (
-          <Link
-            to={
+          <LinkButton
+            url={
               page
                 ? queries.replace(`page=${page}`, `page=${nextPage[1]}`)
                 : queries
@@ -60,7 +61,7 @@ const ItemListContainer = () => {
             }
           >
             Siguiente
-          </Link>
+          </LinkButton>
         )}
       </div>
     </section>

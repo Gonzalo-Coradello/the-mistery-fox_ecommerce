@@ -1,4 +1,5 @@
 import { useSessionContext } from '../../../context/UserContext'
+import GhostButton from '../../Buttons/GhostButton'
 
 const CurrentUser = () => {
   const { user, logoutUser } = useSessionContext()
@@ -6,7 +7,7 @@ const CurrentUser = () => {
   return (
     <section>
       <h2>Mi cuenta</h2>
-      <div className='mt-4 rounded-lg border border-primary-color w-fit p-8 mx-auto grid gap-4'>
+      <div className='my-4 rounded-lg border border-primary-color w-fit p-8 mx-auto grid gap-4'>
         <h2>
           <b>Nombre:</b> {user.first_name} {user.last_name}
         </h2>
@@ -21,9 +22,9 @@ const CurrentUser = () => {
         </h4>
       </div>
 
-      <button onClick={logoutUser} className='btn btn-sm btn-ghost mt-4 normal-case'>
+      <GhostButton handleClick={logoutUser} >
         Logout
-      </button>
+      </GhostButton>
     </section>
   )
 }

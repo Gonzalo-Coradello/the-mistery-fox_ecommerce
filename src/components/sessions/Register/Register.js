@@ -1,3 +1,6 @@
+import Button from "../../Buttons/Button";
+import GhostButton from "../../Buttons/GhostButton";
+
 const Register = () => {
   return (
     <section>
@@ -44,16 +47,16 @@ const Register = () => {
         />
         <br></br>
 
-        <button type="submit" class="btn btn-outline mt-4">
+        <Button>
           Enviar
-        </button>
+        </Button>
       </form>
 
-      <p>¿Ya estás registrado?</p>
+      <p className="mt-8">¿Ya estás registrado?</p>
       <p>
-        <a href="/sessions/login" class="btn btn-sm btn-ghost mt-1 normal-case">
+        <GhostButton url="/sessions/login" classes='font-semibold my-2'>
           Inicia sesión
-        </a>
+        </GhostButton>
       </p>
     </section>
   );
