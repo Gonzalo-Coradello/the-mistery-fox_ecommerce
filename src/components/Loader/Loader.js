@@ -1,5 +1,5 @@
-const Loader = ({ text = 'Cargando...', navbar = false }) => {
-  if (navbar)
+const Loader = ({ text = 'Cargando...', spinner = false }) => {
+  if (spinner)
     return (
       <div className='w-[48px]'>
         <svg className='animate-spin ml-4 h-5 w-5 text-white' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' >

@@ -7,7 +7,7 @@ const CartWidget = () => {
   const { totalQuantity, loading } = useCartContext()
   const navigate = useNavigate()
 
-  if (loading) return <Loader text='' navbar={true} />
+  if (loading) return <Loader text='' spinner={true} />
 
   if (totalQuantity >= 0)
     return (
