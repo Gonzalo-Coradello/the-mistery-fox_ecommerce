@@ -81,7 +81,7 @@ const Navbar = () => {
           <ul className='px-4 hidden lg:flex gap-4'>
             {links.map(({ key, path, slug }) => (
               <li key={key}>
-                <GhostLink url={path} classes='font-normal rounded-md'>
+                <GhostLink url={path} classes='font-normal rounded-md w-max'>
                   {slug}
                 </GhostLink>
               </li>

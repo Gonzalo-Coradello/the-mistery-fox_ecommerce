@@ -2,7 +2,7 @@ import { useSessionContext } from '../../../context/UserContext'
 import GhostButton from '../../Buttons/GhostButton'
 
 const CurrentUser = () => {
-  const { user, logoutUser } = useSessionContext()
+  const { user, logout } = useSessionContext()
 
   return (
     <section>
@@ -22,7 +22,7 @@ const CurrentUser = () => {
         </h4>
       </div>
 
-      <GhostButton handleClick={logoutUser} >
+      <GhostButton handleClick={logout} >
         Logout
       </GhostButton>
     </section>

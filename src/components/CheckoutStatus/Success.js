@@ -22,6 +22,12 @@ const Success = () => {
     if(!orderID || !status) navigate('/cart')
   })
 
+  useEffect(() => {
+    if(orderID && status === 'approved') {
+      setNotification('success', '¡Compra exitosa!')
+    }
+  }, []) // eslint-disable-line
+
   if(orderID && status === 'approved') return (
     <section>
         <div className="border border-primary-color p-12 grid gap-4 mx-4 my-16 max-w-[700px] lg:mx-auto">

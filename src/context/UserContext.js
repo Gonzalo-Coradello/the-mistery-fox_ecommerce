@@ -40,6 +40,7 @@ export const UserProvider = ({ children }) => {
     const data = await userService.login(email, password)
     setIsLogged(true)
     setUser(data.payload)
+    return data
   }
 
   const loginWithGithub = async () => {
