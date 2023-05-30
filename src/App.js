@@ -18,6 +18,8 @@ import Failure from './components/CheckoutStatus/Failure'
 import Pending from './components/CheckoutStatus/Pending'
 import { UserProvider } from './context/UserContext'
 import CurrentUser from './components/sessions/CurrentUser/CurrentUser'
+import ManageProducts from './components/ManageProducts/ManageProducts'
+import ManageUsers from './components/ManageUsers/ManageUsers'
 const { user, premium, admin } = ROLES
 
 initMercadoPago(process.env.REACT_APP_MP_testPublicKey)
@@ -40,28 +42,23 @@ function App() {
                   <Route path='/sessions/register' element={<Register />} />
 
                   {/* Protected */}
-                  <Route
-                    element={
-                      <RequireAuth allowedRoles={[user, premium, admin]} />
-                    }>
+                  <Route element={<RequireAuth allowedRoles={[user, premium, admin]} />}>
                     <Route path='/books' element={<ItemListContainer />} />
-                    <Route
-                      path='/category/:categoryId'
-                      element={<ItemListContainer />}
-                    />
-                    <Route
-                      path='/detail/:productId'
-                      element={<ItemDetailContainer />}
-                    />
+                    <Route path='/category/:categoryId' element={<ItemListContainer />} />
+                    <Route path='/detail/:productId' element={<ItemDetailContainer />} />
                     <Route path='/sessions/user' element={<CurrentUser />} />
 
-                    <Route
-                      element={<RequireAuth allowedRoles={[user, premium]} />}>
+                    <Route element={<RequireAuth allowedRoles={[user, premium]} />}>
                       <Route path='/cart' element={<Cart />} />
                       <Route path='/checkout' element={<CheckoutContainer />} />
                       <Route path='/checkout/success' element={<Success />} />
                       <Route path='/checkout/failure' element={<Failure />} />
                       <Route path='/checkout/pending' element={<Pending />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[premium, admin]} />}>
+                      <Route path='/products' element={<ManageProducts />} />
+                      <Route path='/users' element={<ManageUsers />} />
                     </Route>
                   </Route>
 
