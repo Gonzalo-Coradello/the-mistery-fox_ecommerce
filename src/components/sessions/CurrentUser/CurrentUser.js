@@ -1,13 +1,32 @@
+import { useEffect, useState } from 'react'
 import { useSessionContext } from '../../../context/UserContext'
-import GhostButton from '../../Buttons/GhostButton'
+import Button from '../../Buttons/Button'
+import { BsFillPersonFill } from 'react-icons/bs'
 
 const CurrentUser = () => {
   const { user, logout } = useSessionContext()
+  const [profile, setProfile] = useState(null)
+
+  useEffect(() => {
+    user.documents?.find(doc => doc.name === 'profile')
+      ? setProfile(`${process.env.REACT_APP_urlBase}/images/profiles/${user.id}.png`)
+      : setProfile(null)
+  }, [user])
 
   return (
     <section>
-      <h2>Mi cuenta</h2>
-      <div className='my-4 rounded-lg border border-primary-color w-fit p-8 mx-auto grid gap-4'>
+      <h2 className='text-xl font-semibold'>Mi cuenta</h2>
+      <div className='my-4 rounded-lg border border-primary-color w-fit p-8 mx-auto grid gap-2'>
+        <div className='max-w-[200px] mx-auto my-4'>
+          {profile 
+            ? <img
+                src={profile}
+                alt={`Foto de perfil de ${user.first_name}`}
+                className='rounded-full'
+              />
+            : <BsFillPersonFill size={200} className=' rounded-full p-4 bg-base-300' />
+          }
+        </div>
         <h2>
           <b>Nombre:</b> {user.first_name} {user.last_name}
         </h2>
@@ -22,9 +41,7 @@ const CurrentUser = () => {
         </h4>
       </div>
 
-      <GhostButton handleClick={logout} >
-        Logout
-      </GhostButton>
+      <Button handleClick={logout}>Logout</Button>
     </section>
   )
 }
