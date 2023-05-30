@@ -40,7 +40,7 @@ export default class Product {
   }
 
   createProduct = async data => {
-    const response = await axios.post(url_base, data)
+    const response = await axios.postForm(url_base, data, { headers: {'content-type': 'multipart/form-data'}})
     return response.data.payload
   }
 
