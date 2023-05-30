@@ -31,3 +31,14 @@ section {
   /* background-color: #E6AF2E; */
   transition: all 300ms;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
