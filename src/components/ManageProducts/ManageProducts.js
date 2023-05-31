@@ -23,9 +23,9 @@ const ManageProducts = () => {
     document.title = 'Administrar productos'
   }, [])
 
-  // const handleCategory = selectedCategory => {
-  //   setSearchParams({ category: selectedCategory })
-  // }
+  const handleCategory = e => {
+    setSearchParams({ category: e.target.value })
+  }
 
   const handleSort = col => {
     const params =
@@ -52,11 +52,27 @@ const ManageProducts = () => {
     )
 
   return (
-    <section>
-      <h2>Administrar productos</h2>
-      <LinkButton url='/products/create' classes='w-max'>
-        Crear producto
-      </LinkButton>
+    <section className='w-11/12 mx-auto'>
+      <h2 className='text-2xl font-bold mt-8'>Administrar productos</h2>
+      <div className='flex justify-between my-4'>
+        <select name="category" onChange={handleCategory} defaultValue='' className="select select-bordered border-primary w-fit max-w-xs">
+          <option value="">Todas las categorías</option>
+          <option value="novela">Novelas</option>
+          <option value="cuento">Cuentos</option>
+          <option value="romance">Romance</option>
+          <option value="fantasia">Fantasía</option>
+          <option value="terror">Terror</option>
+          <option value="teatral">Teatro</option>
+          <option value="ciencia-ficcion">Ciencia ficción</option>
+          <option value="policial">Policial</option>
+          <option value="aventura">Aventura</option>
+          <option value="juvenil">Juvenil</option>
+          <option value="coleccion">Colecciones</option>
+        </select>
+        <LinkButton url='/products/create' classes='w-max mt-0'>
+          Crear producto
+        </LinkButton>
+      </div>
 
       <ProductsTable
         products={products}
