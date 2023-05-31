@@ -21,6 +21,7 @@ import CurrentUser from './components/sessions/CurrentUser/CurrentUser'
 import ManageProducts from './components/ManageProducts/ManageProducts'
 import ManageUsers from './components/ManageUsers/ManageUsers'
 import CreateProductForm from './components/CreateProductForm/CreateProductForm'
+import ModifyProduct from './components/ModifyProduct/ModifyProduct'
 const { user, premium, admin } = ROLES
 
 initMercadoPago(process.env.REACT_APP_MP_testPublicKey)
@@ -60,6 +61,7 @@ function App() {
                     <Route element={<RequireAuth allowedRoles={[premium, admin]} />}>
                       <Route path='/products' element={<ManageProducts />} />
                       <Route path='/products/create' element={<CreateProductForm />} />
+                      <Route path='/products/edit/:productId' element={<ModifyProduct />} />
                       <Route path='/users' element={<ManageUsers />} />
                     </Route>
                   </Route>
