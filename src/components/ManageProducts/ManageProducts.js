@@ -12,6 +12,7 @@ const ManageProducts = () => {
   const queries = location.search
   const page = searchParams.get('page')
   const [sort, setSort] = useState({})
+  const [category, setCategory] = useState('')
 
   const getProducts = () => productService.getProductsWithQueries(searchParams)
   const { data, error, loading, prevPage, nextPage } = useAsync(getProducts, [
@@ -24,7 +25,9 @@ const ManageProducts = () => {
   }, [])
 
   const handleCategory = e => {
+    setCategory(e.target.value)
     setSearchParams({ category: e.target.value })
+    setSort({})
   }
 
   const handleSort = col => {
@@ -36,6 +39,7 @@ const ManageProducts = () => {
         : { col, order: 'asc' }
 
     setSort(params)
+    setCategory('')
     if (params.col) {
       setSearchParams({ sort: params.col, sort_order: params.order })
     } else {
@@ -55,7 +59,7 @@ const ManageProducts = () => {
     <section className='w-11/12 mx-auto'>
       <h2 className='text-2xl font-bold mt-8'>Administrar productos</h2>
       <div className='flex justify-between my-4'>
-        <select name="category" onChange={handleCategory} defaultValue='' className="select select-bordered border-primary w-fit max-w-xs">
+        <select name="category" onChange={handleCategory} value={category} className="select select-bordered border-primary w-fit max-w-xs">
           <option value="">Todas las categorías</option>
           <option value="novela">Novelas</option>
           <option value="cuento">Cuentos</option>

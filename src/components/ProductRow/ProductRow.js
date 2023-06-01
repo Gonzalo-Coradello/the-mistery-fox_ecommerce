@@ -54,7 +54,7 @@ const ProductRow = ({
         <td>{owner}</td>
         <td>
           {user.role === 'admin' || owner === user.email ? (
-            <Link to={`/products/edit/${_id}`}>
+            <Link to={`/products/edit/${_id}`} className='hover:opacity-50 transition-all duration-300' >
               <MdOutlineEditNote size={25} className='mx-auto' />
             </Link>
           ) : (
@@ -68,7 +68,7 @@ const ProductRow = ({
         </td>
         <td>
           {user.role === 'admin' || owner === user.email ? (
-            <button onClick={() => handleDelete(_id)}>
+            <button onClick={() => handleDelete(_id)} className='hover:opacity-50 transition-all duration-300' >
               <FaTrash size={15} className='mx-auto' />
             </button>
           ) : (
