@@ -2,30 +2,56 @@ import { useEffect, useState } from 'react'
 import { useSessionContext } from '../../../context/UserContext'
 import Button from '../../Buttons/Button'
 import { BsFillPersonFill } from 'react-icons/bs'
+import User from '../../../services/axios/userService'
+import { useNotification } from '../../../services/notification/NotificationService'
+import LinkButton from '../../Buttons/LinkButton'
+import { useNavigate } from 'react-router-dom'
+const userService = new User()
 
 const CurrentUser = () => {
-  const { user, logout } = useSessionContext()
-  const [profile, setProfile] = useState(null)
+  const { user, logout, updateRole } = useSessionContext()
+  const [image, setImage] = useState(null)
+  const { setNotification } = useNotification()
+  const navigate = useNavigate()
 
   useEffect(() => {
     user.documents?.find(doc => doc.name === 'profile')
-      ? setProfile(`${process.env.REACT_APP_urlBase}/images/profiles/${user.id}.png`)
-      : setProfile(null)
+      ? setImage(`${process.env.REACT_APP_urlBase}/images/profiles/${user.id}.png`)
+      : setImage(null)
   }, [user])
+
+  const handleImage = async e => {
+    const file = e.target.files[0]
+    const data = { event: 'profile', file }
+    const response = await userService.uploadDocuments(user._id, data)
+    if(response.status === 'success') {
+      setImage(URL.createObjectURL(file))
+      setNotification('success', 'Foto de perfil actualizada')
+    }
+  }
+
+  const handleRole = async () => {
+    const response = await updateRole(user.id)
+    if(response.status === 'success') {
+      setNotification('success', 'Rol de usuario actualizado. Vuelva a iniciar sesión')
+      navigate('/sessions/login')
+    } 
+  }
 
   return (
     <section>
       <h2 className='text-xl font-semibold'>Mi cuenta</h2>
       <div className='my-4 rounded-lg border border-primary-color w-fit p-8 mx-auto grid gap-2'>
-        <div className='max-w-[200px] mx-auto my-4'>
-          {profile 
+        <div className='max-w-[200px] mx-auto my-4 relative rounded-full hover:brightness-75 transition-all duration-300'>
+          {image 
             ? <img
-                src={profile}
+                src={image}
                 alt={`Foto de perfil de ${user.first_name}`}
-                className='rounded-full'
+                className='rounded-full w-full aspect-square object-cover'
               />
             : <BsFillPersonFill size={200} className=' rounded-full p-4 bg-base-300' />
           }
+          <input type='file' accept='image/*' onChange={handleImage} className='absolute opacity-0 w-full h-full rounded-full inset-0 cursor-pointer' />
         </div>
         <h2>
           <b>Nombre:</b> {user.first_name} {user.last_name}
@@ -36,9 +62,16 @@ const CurrentUser = () => {
         <h4>
           <b>Edad:</b> {user.age}
         </h4>
-        <h4>
-          <b>Rol:</b> {user.role}
-        </h4>
+        <div>
+          <h4>
+            <b>Rol:</b> {user.role}
+          </h4>
+          {
+            user.role === 'premium'
+              ? <Button handleClick={handleRole}>Actualizar rol</Button>
+              : <LinkButton url='/sessions/user/upgrade'>Volverse premium</LinkButton>
+          }
+        </div>
       </div>
 
       <Button handleClick={logout}>Logout</Button>

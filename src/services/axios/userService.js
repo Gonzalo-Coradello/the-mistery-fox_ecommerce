@@ -83,7 +83,6 @@ export default class User {
   deleteUser = async email => {
     try {
       const response = await axios.delete(`${url_base_users}/email/${email}`)
-      console.log(response.data)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -93,7 +92,7 @@ export default class User {
 
   uploadDocuments = async (id, data) => {
     try {
-      const response = await axios.post(`${url_base_users}/${id}/documents`, data)
+      const response = await axios.postForm(`${url_base_users}/${id}/documents`, data,  { headers: {'content-type': 'multipart/form-data'}})
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
