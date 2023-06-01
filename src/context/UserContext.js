@@ -11,7 +11,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [isLogged, setIsLogged] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [firstRender, setFirstRender] = useState(true)
 
   useEffect(() => {
     setLoading(true)
@@ -27,7 +26,6 @@ export const UserProvider = ({ children }) => {
       })
       .catch(error => console.log(error.message))
       .finally(() => {
-        setFirstRender(false)
         setLoading(false)
       })
   }, [])
@@ -56,6 +54,14 @@ export const UserProvider = ({ children }) => {
     userService.logout()
   }
 
+  const updateRole = async (id) => await userService.updateRole(id)
+
+  const uploadDocuments = async (id, data) => {
+    const response = await userService.uploadDocuments(id, data)
+    setUser(prev => ({ ...prev, documents: prev.documents.concat(response.payload) }))
+    return response
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -68,7 +74,8 @@ export const UserProvider = ({ children }) => {
         loginWithEmail,
         loginWithGithub,
         logout,
-        firstRender,
+        updateRole,
+        uploadDocuments
       }}
     >
       {children}
