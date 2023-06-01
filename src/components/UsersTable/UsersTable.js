@@ -12,26 +12,22 @@ const UsersTable = ({ users, loading }) => {
   if (loading) return <Loader />
 
   return (
-    <div className='overflow-auto border border-base-300'>
+    <div className='overflow-auto border border-base-300 my-4'>
       <table className='table table-zebra table-compact w-full text-center'>
         <thead>
           <tr>
-            {tableHead.map(({ value, slug }) =>
-              value ? (
-                <th key={value}>
-                  <button>{slug} </button>
-                </th>
-              ) : (
-                <th key={slug} className='normal-case'>
+            {tableHead.map(({ value, slug }) => (
+                <th key={value} className='normal-case'>
                   {slug}
                 </th>
               )
             )}
+            <th className='normal-case'>Eliminar</th>
           </tr>
         </thead>
         <tbody>
           {users.map(user => (
-            <UserRow key={user._id} {...user} />
+            <UserRow key={user.email} {...user} />
           ))}
         </tbody>
       </table>

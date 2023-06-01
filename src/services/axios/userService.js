@@ -17,7 +17,6 @@ export default class User {
   githubLogin = async () => {
     // const response = await axios.get(`${url_base}/github`)
     window.open(`${url_base}/github`, '_self')
-    // console.log(response.data)
     // return response.data
   }
 
@@ -44,7 +43,6 @@ export default class User {
   getAllUsers = async () => {
     try {
       const response = await axios.get(`${url_base_users}`)
-      console.log(response)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data.payload
     } catch (error) {
@@ -65,6 +63,27 @@ export default class User {
   updateRole = async id => {
     try {
       const response = await axios.put(`${url_base_users}/premium/${id}`)
+      if (!response) return { status: 'error', error: 'Auth error' }
+      return response?.data
+    } catch (error) {
+      return { status: 'error', error }
+    }
+  }
+
+  updateUser = async (email, data) => {
+    try {
+      const response = await axios.put(`${url_base_users}/${email}`, data)
+      if (!response) return { status: 'error', error: 'Auth error' }
+      return response?.data
+    } catch (error) {
+      return { status: 'error', error }
+    }
+  }
+  
+  deleteUser = async email => {
+    try {
+      const response = await axios.delete(`${url_base_users}/email/${email}`)
+      console.log(response.data)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {

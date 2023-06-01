@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import UsersTable from '../UsersTable/UsersTable'
 import useAsync from '../../hooks/useAsync'
 import User from '../../services/axios/userService'
+import Button from '../Buttons/Button'
+import { useNotification } from '../../services/notification/NotificationService'
+import { useNavigate } from 'react-router-dom'
 const userService = new User()
 
 const ManageUsers = () => {
@@ -9,9 +12,18 @@ const ManageUsers = () => {
     document.title = 'Administrar usuarios'
   }, [])
 
+  const navigate = useNavigate()
+  const { setNotification } = useNotification()
+
   const { data: users, error, loading } = useAsync(userService.getAllUsers)
 
-  console.log(users)
+  const handleDelete = async () => {
+    const result = await userService.deleteInactiveUsers()
+    if(result) {
+      setNotification('info', 'Se eliminaron los usuarios inactivos')
+      navigate(0)
+    }
+  }
 
   if (error)
     return (
@@ -22,14 +34,13 @@ const ManageUsers = () => {
     )
 
   return (
-    <section className='w-11/12 mx-auto'>
+    <section className='w-11/12 mx-auto min-h-[85vh]'>
       <h2 className='text-2xl font-bold mt-8'>Administrar usuarios</h2>
       <UsersTable
         users={users}
-        // sort={sort}
-        // handleSort={handleSort}
         loading={loading}
       />
+      <Button handleClick={handleDelete}>Eliminar usuarios inactivos</Button>
     </section>
   )
 }
