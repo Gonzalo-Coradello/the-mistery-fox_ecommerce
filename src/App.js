@@ -25,7 +25,7 @@ import ModifyProduct from './components/ModifyProduct/ModifyProduct'
 import UpgradeToPremium from './components/sessions/UpgradeToPremium/UpgradeToPremium'
 const { user, premium, admin } = ROLES
 
-initMercadoPago(process.env.REACT_APP_MP_testPublicKey)
+initMercadoPago(process.env.REACT_APP_MP_publicKey)
 
 function App() {
   return (
