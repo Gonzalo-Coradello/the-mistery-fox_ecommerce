@@ -55,7 +55,7 @@ const Cart = () => {
         </GhostButton>
         <h2 className='text-xl font-bold mr-8'>Total: ${total}</h2>
       </div>
-      <Button onClick={handlePurchase}>Finalizar compra</Button>
+      <Button handleClick={handlePurchase}>Finalizar compra</Button>
     </section>
   )
 }
