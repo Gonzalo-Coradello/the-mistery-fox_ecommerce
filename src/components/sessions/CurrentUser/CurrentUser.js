@@ -6,11 +6,13 @@ import User from '../../../services/axios/userService'
 import { useNotification } from '../../../services/notification/NotificationService'
 import LinkButton from '../../Buttons/LinkButton'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../Loader/Loader'
 const userService = new User()
 
 const CurrentUser = () => {
   const { user, logout, updateRole } = useSessionContext()
   const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
   const { setNotification } = useNotification()
   const navigate = useNavigate()
 
@@ -21,13 +23,17 @@ const CurrentUser = () => {
   }, [user])
 
   const handleImage = async e => {
+    setLoading(true)
     const file = e.target.files[0]
     const data = { event: 'profile', file }
     const response = await userService.uploadDocuments(user._id, data)
     if(response.status === 'success') {
       setImage(URL.createObjectURL(file))
       setNotification('success', 'Foto de perfil actualizada')
+    } else {
+      setNotification('error', 'Hubo un error al subir la imagen')
     }
+    setLoading(false)
   }
 
   const handleRole = async () => {
@@ -52,6 +58,11 @@ const CurrentUser = () => {
             : <BsFillPersonFill size={200} className=' rounded-full p-4 bg-base-300' />
           }
           <input type='file' accept='image/*' onChange={handleImage} className='absolute opacity-0 w-full h-full rounded-full inset-0 cursor-pointer' />
+          { loading && (
+            <div className='absolute w-full h-full rounded-full bg-black/70 inset-0 grid justify-center items-center'>
+              <Loader spinner={true} />
+            </div>
+          )}
         </div>
         <h2>
           <b>Nombre:</b> {user.first_name} {user.last_name}
