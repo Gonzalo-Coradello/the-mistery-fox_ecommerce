@@ -14,12 +14,6 @@ export default class User {
     return response.data
   }
 
-  githubLogin = async () => {
-    // const response = await axios.get(`${url_base}/github`)
-    window.open(`${url_base}/github`, '_self')
-    // return response.data
-  }
-
   getCurrentUser = async () => {
     try {
       const response = await axios.get(`${url_base}/current`)
