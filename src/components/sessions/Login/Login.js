@@ -71,7 +71,7 @@ const Login = () => {
       </form>
 
       <p>
-        <GhostLink url='/sessions/password_reset' classes='font-semibold my-4'>
+        <GhostLink url='/sessions/forgot_password' classes='font-semibold my-4'>
           Olvidé mi contraseña
         </GhostLink>
       </p>

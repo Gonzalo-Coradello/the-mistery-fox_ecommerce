@@ -23,6 +23,8 @@ import ManageUsers from './components/ManageUsers/ManageUsers'
 import CreateProductForm from './components/CreateProductForm/CreateProductForm'
 import ModifyProduct from './components/ModifyProduct/ModifyProduct'
 import UpgradeToPremium from './components/sessions/UpgradeToPremium/UpgradeToPremium'
+import ForgotPassword from './components/sessions/ForgotPassword/ForgotPassword'
+import ChangePassword from './components/sessions/ChangePassword/ChangePassword'
 const { user, premium, admin } = ROLES
 
 initMercadoPago(process.env.REACT_APP_MP_publicKey)
@@ -43,6 +45,8 @@ function App() {
                   <Route path='/' element={<LandingPage />} />
                   <Route path='/sessions/login' element={<Login />} />
                   <Route path='/sessions/register' element={<Register />} />
+                  <Route path='/sessions/forgot_password' element={<ForgotPassword />} />
+                  <Route path='/sessions/password_reset/:id/:token' element={<ChangePassword />} />
 
                   {/* Protected */}
                   <Route element={<RequireAuth allowedRoles={[user, premium, admin]} />}>
