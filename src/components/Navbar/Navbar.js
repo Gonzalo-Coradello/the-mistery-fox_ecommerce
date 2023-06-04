@@ -3,6 +3,7 @@ import CartWidget from '../CartWidget/CartWidget'
 import { useSessionContext } from '../../context/UserContext'
 import { useEffect, useState } from 'react'
 import GhostLink from '../Buttons/GhostLink'
+import GhostButton from '../Buttons/GhostButton'
 
 const Navbar = () => {
   const location = useLocation()
@@ -13,7 +14,7 @@ const Navbar = () => {
     const currentLinks = [
       { key: 1, path: '/', slug: 'inicio' },
       { key: 2, path: '/books', slug: 'nuestros libros' },
-      { key: 3, path: '#', slug: 'contacto' },
+      { key: 3, path: 'mailto:gonzalocoradello@gmail.com', slug: 'contacto' },
     ]
 
     isLogged
@@ -48,7 +49,10 @@ const Navbar = () => {
   return (
     <nav
       className={location.pathname === '/' ? 'text-secondary' : 'text-primary'}>
-      <div className={`navbar fixed z-20 backdrop-blur-sm pr-4 ${ location.pathname === '/' ? 'bg-white/10' : 'bg-transparent' }`}>
+      <div
+        className={`navbar fixed z-20 backdrop-blur-sm pr-4 ${
+          location.pathname === '/' ? 'bg-white/10' : 'bg-transparent'
+        }`}>
         <div className='navbar-start'>
           <div className='dropdown'>
             <label tabIndex={0} className='btn btn-ghost lg:hidden'>
@@ -68,10 +72,20 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className={`menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-max ${location.pathname === '/' ? 'bg-white/10 backdrop-blur-sm' : 'bg-base-300'} `}>
+              className={`menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-max ${
+                location.pathname === '/'
+                  ? 'bg-white/10 backdrop-blur-sm'
+                  : 'bg-base-300'
+              } `}>
               {links.map(({ key, path, slug }) => (
                 <li key={key}>
-                  <GhostLink url={path}>{slug}</GhostLink>
+                  {slug === 'contacto' ? (
+                    <GhostButton>
+                      <a href={path}>{slug}</a>
+                    </GhostButton>
+                  ) : (
+                    <GhostLink url={path}>{slug}</GhostLink>
+                  )}
                 </li>
               ))}
             </ul>
@@ -81,9 +95,15 @@ const Navbar = () => {
           <ul className='px-4 hidden lg:flex gap-4'>
             {links.map(({ key, path, slug }) => (
               <li key={key}>
-                <GhostLink url={path} classes='font-normal rounded-md w-max'>
-                  {slug}
-                </GhostLink>
+                {slug === 'contacto' ? (
+                  <GhostButton>
+                    <a href={path}>{slug}</a>
+                  </GhostButton>
+                ) : (
+                  <GhostLink url={path} classes='font-normal rounded-md w-max'>
+                    {slug}
+                  </GhostLink>
+                )}
               </li>
             ))}
           </ul>
