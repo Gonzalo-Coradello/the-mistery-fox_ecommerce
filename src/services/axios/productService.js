@@ -14,6 +14,7 @@ export default class Product {
     const sort = searchParams.get('sort')
     const sort_order = searchParams.get('sort_order')
     const stock = searchParams.get('stock')
+    const search = searchParams.get('search')
 
     const options = {}
     category && (options.category = category)
@@ -22,6 +23,7 @@ export default class Product {
     sort && (options.sort = sort)
     sort_order && (options.sort_order = sort_order)
     stock && (options.stock = stock)
+    search && (options.search = search)
 
     const queries = Object.entries(options)
       .map(subArr => subArr.join('='))

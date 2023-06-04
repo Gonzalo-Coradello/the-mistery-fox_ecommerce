@@ -6,6 +6,8 @@ import 'swiper/css'
 import 'swiper/css/autoplay'
 import { BsSearch } from 'react-icons/bs'
 import LinkButton from '../Buttons/LinkButton'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const books = [
   { title: 'El Principito', src: '/images/saint-exupery_el-principito.png' },
@@ -18,22 +20,38 @@ const books = [
 ]
 
 const LandingPage = () => {
+
+  const navigate = useNavigate()
+  const [search, setSearch] = useState('')
+
+  const handleChange = e => setSearch(e.target.value)
+
+  const handleClick = e => {
+    e.preventDefault()
+    if(search) {
+      navigate(`/books?search=${search.toLowerCase().replace(' ', '+')}`)
+    }
+
+  }
+
   return (
     <section className='landing bg-neutral'>
       <div>
-        <div className='bg-base-100 max-w-[1080px] mx-auto grid justify-center rounded-2xl relative z-10 shadow-md'>
+        <div className='bg-base-100 max-w-[1024px] mx-auto grid justify-center xl:rounded-2xl relative z-10 shadow-md'>
           <div>
             <Logo />
           </div>
         </div>
-        <div className='shadow-custom max-w-[900px] mx-auto mt-[-1rem] rounded-2xl'>
+        <div className='shadow-custom w-11/12 max-w-[900px] mx-auto mt-[-1rem] rounded-2xl bg-black/50'>
           <div className='booksBackground py-10 rounded-2xl'>
             <div className='z-10 relative'>
               <h2 className='font-heading text-3xl py-1'>¿Qué libro quieres leer hoy?</h2>
-              <div className='flex justify-between border rounded-2xl px-4 py-2 mx-20 mt-6'>
-                <p className='font-light'>Buscar por autor, título, género</p>
-                <BsSearch size={20} />
-              </div>
+              <form className='flex items-center border rounded-2xl px-4 py-2 mx-8 md:mx-20 mt-6'>
+                <input className='font-light w-full bg-transparent outline-none placeholder-white' type='text' value={search} onChange={handleChange} placeholder='Buscar por autor, título, género' />
+                <button onClick={handleClick} className='hover:opacity-50 transition-all duration-300'>
+                  <BsSearch size={20} />
+                </button>
+              </form>
             </div>
           </div>
         </div>
