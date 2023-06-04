@@ -39,7 +39,7 @@ const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id }) => {
         className={`flex justify-center items-center gap-2 lg:justify-between ${
           inCart ? 'flex-col' : null
         }`}>
-        <div className='flex gap-4 justify-center items-center'>
+        <div className='flex gap-4 justify-center items-center border rounded-lg p-1'>
           <GhostButton handleClick={decrement} square={true} >-</GhostButton>
           <h4 className='cursor-default font-medium text-sm sm:text-base'>
             {quantity}
@@ -47,8 +47,8 @@ const ItemCount = ({ stock, initial = 1, price, onAdd, inCart, id }) => {
           <GhostButton handleClick={increment} square={true} >+</GhostButton>
         </div>
         <h3
-          className={`text-sm md:text-base font-medium ${
-            inCart ? 'w-max mx-auto' : 'w-fit ml-auto'
+          className={`text-sm md:text-base font-semibold ${
+            inCart ? 'md:text-base w-max mx-auto' : 'md:text-lg w-fit ml-auto'
           }`}>
           Total: ${price * quantity}
         </h3>

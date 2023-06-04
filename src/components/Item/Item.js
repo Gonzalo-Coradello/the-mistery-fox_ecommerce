@@ -1,6 +1,6 @@
 import LinkButton from '../Buttons/LinkButton'
 
-const Item = ({ _id, title, author, thumbnails, price }) => {
+const Item = ({ _id, title, author, thumbnails, price, lang }) => {
   return (
     <div className='card border border-primary-color '>
       <figure>
@@ -15,7 +15,10 @@ const Item = ({ _id, title, author, thumbnails, price }) => {
       <div className='card-body'>
         <h2 className='card-title text-xl font-bold mx-auto'>{title}</h2>
         <h4 className='text-sm'>{author}</h4>
-        <h4 className='text-sm'>${price}</h4>
+        <div className='flex justify-around items-center text-sm font-medium'>
+          <h4>{lang === 'es' ? 'Español' : 'Inglés'}</h4>
+          <h4>${price}</h4>
+        </div>
         <div className='card-actions justify-center'>
           <LinkButton url={ `/detail/${_id}` }>
             Ver detalle
