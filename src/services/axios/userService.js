@@ -93,4 +93,25 @@ export default class User {
       return { status: 'error', error }
     }
   }
+
+  sendPasswordEmail = async email => {
+    try {
+      const response = await axios.post(`${url_base}/password_reset`, { email })
+      console.log(response)
+      if (!response) return { status: 'error', error: 'Error' }
+      return response?.data
+    } catch (error) {
+      return { status: 'error', error }
+    }
+  }
+
+  changePassword = async (id, token, newPassword, confirmation) => {
+    try {
+      const response = await axios.put(`${url_base}/password_reset/${id}/${token}`, { newPassword, confirmation })
+      if (!response) return { status: 'error', error: 'Error' }
+      return response?.data
+    } catch (error) {
+      return { status: 'error', error }
+    }
+  }
 }
