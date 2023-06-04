@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <nav
       className={location.pathname === '/' ? 'text-secondary' : 'text-primary'}>
-      <div className='navbar fixed bg-transparent z-10 backdrop-blur-sm pr-4'>
+      <div className={`navbar fixed z-20 backdrop-blur-sm pr-4 ${ location.pathname === '/' ? 'bg-white/10' : 'bg-transparent' }`}>
         <div className='navbar-start'>
           <div className='dropdown'>
             <label tabIndex={0} className='btn btn-ghost lg:hidden'>
@@ -68,7 +68,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-300 rounded-box w-max'>
+              className={`menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-max ${location.pathname === '/' ? 'bg-white/10 backdrop-blur-sm' : 'bg-base-300'} `}>
               {links.map(({ key, path, slug }) => (
                 <li key={key}>
                   <GhostLink url={path}>{slug}</GhostLink>
