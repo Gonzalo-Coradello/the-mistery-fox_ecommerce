@@ -62,7 +62,7 @@ const CheckoutContainer = () => {
             )}
             <Wallet
               onReady={() => setLoading(false)}
-              initialization={{ preferenceId, redirectMode: 'modal' }}
+              initialization={{ preferenceId }}
             />
           </button>
         )}
