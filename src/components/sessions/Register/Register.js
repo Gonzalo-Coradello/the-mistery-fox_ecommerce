@@ -52,7 +52,7 @@ const Register = () => {
           required
           type='text'
           name='last_name'
-          placeholder='Last name'
+          placeholder='Apellido'
           value={formData.last_name}
           onChange={handleChange}
           className='input input-bordered border-white w-full max-w-xs mb-2'
@@ -72,7 +72,7 @@ const Register = () => {
           required
           type='tel'
           name='age'
-          placeholder='Age'
+          placeholder='Edad'
           value={formData.age}
           onChange={handleChange}
           className='input input-bordered border-white w-full max-w-xs mb-2'
@@ -82,7 +82,7 @@ const Register = () => {
           required
           type='password'
           name='password'
-          placeholder='Password'
+          placeholder='Contraseña'
           value={formData.password}
           onChange={handleChange}
           className='input input-bordered border-white w-full max-w-xs mb-2'

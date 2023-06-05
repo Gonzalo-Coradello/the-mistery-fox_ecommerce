@@ -82,7 +82,7 @@ const ManageProducts = () => {
 
       {
         products?.length === 0 
-          ? <p>Tu cuenta aún no tiene productos.</p>
+          ?  user.role === 'premium' ? <p>Tu cuenta aún no tiene productos.</p> : <p>No se encontraron productos.</p>
           : <ProductsTable products={products} sort={sort} handleSort={handleSort} loading={loading} user={user} />
       }
       

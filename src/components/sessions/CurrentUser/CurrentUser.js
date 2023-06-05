@@ -64,19 +64,21 @@ const CurrentUser = () => {
             </div>
           )}
         </div>
-        <h2>
-          <b>Nombre:</b> {user.first_name} {user.last_name}
-        </h2>
-        <h4>
-          <b>Email:</b> {user.email}
-        </h4>
-        <h4>
-          <b>Edad:</b> {user.age}
-        </h4>
+        <div className='text-center space-y-2'>
+          <p>
+            <span className='font-bold'>Nombre:</span> {user.first_name} {user.last_name}
+          </p>
+          <p>
+            <span className='font-bold'>Email:</span> {user.email}
+          </p>
+          <p>
+            <span className='font-bold'>Edad:</span> {user.age}
+          </p>
+          <p>
+            <span className='font-bold'>Rol:</span> {user.role}
+          </p>
+        </div>
         <div>
-          <h4>
-            <b>Rol:</b> {user.role}
-          </h4>
           {
             user.role === 'premium'
               ? <Button handleClick={handleRole}>Actualizar rol</Button>

@@ -49,7 +49,7 @@ const CheckoutContainer = () => {
   if (preferenceId)
     return (
       <section className='min-h-[85vh]'>
-        <h2 className='font-heading text-2xl font-bold border-b w-fit mx-auto pb-4 px-14'>
+        <h2 className='font-heading text-2xl font-bold w-fit mx-auto pb-4 px-14'>
           Checkout
         </h2>
         <Checkout items={items} amount={amount} />

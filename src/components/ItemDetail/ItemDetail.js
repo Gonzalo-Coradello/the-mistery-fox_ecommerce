@@ -11,6 +11,7 @@ const ItemDetail = ({
   thumbnails,
   price,
   stock,
+  lang
 }) => {
   const { setNotification } = useNotification()
   const { addItem } = useCartContext()
@@ -29,11 +30,12 @@ const ItemDetail = ({
           alt={title}
         />
       </div>
-      <div className='card-body px-0 basis-1/2 lg:px-6'>
+      <div className='card-body px-0 pt-4 basis-1/2 gap-0 lg:px-6'>
         <h2 className='card-title mx-auto text-xl font-heading'>{title}</h2>
-        <h3 className='text-base font-light'>{author}</h3>
+        <h3 className='text-base font-light text-primary/70'>{author}</h3>
+        <p className='mt-4 text-sm'>{ lang === 'es' ? 'Español' : 'Inglés' }</p>
         <p className='mt-4 text-justify font-light'>{description}</p>
-        <div className='mt-4'>
+        <div className='mt-6'>
           <ItemCount
             stock={stock}
             initial={1}
