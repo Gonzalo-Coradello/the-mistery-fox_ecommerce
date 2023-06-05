@@ -27,7 +27,7 @@ import ForgotPassword from './components/sessions/ForgotPassword/ForgotPassword'
 import ChangePassword from './components/sessions/ChangePassword/ChangePassword'
 const { user, premium, admin } = ROLES
 
-initMercadoPago(process.env.REACT_APP_MP_publicKey)
+initMercadoPago(process.env.REACT_APP_MP_publicKey, { locale: 'es-AR' })
 
 function App() {
   return (
