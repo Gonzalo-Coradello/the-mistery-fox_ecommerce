@@ -51,7 +51,7 @@ const Navbar = () => {
       className={location.pathname === '/' ? 'text-secondary' : 'text-primary'}>
       <div
         className={`navbar fixed z-20 backdrop-blur-sm pr-4 ${
-          location.pathname === '/' ? 'bg-white/10' : 'bg-transparent'
+          location.pathname === '/' ? 'bg-neutral/50' : 'bg-transparent'
         }`}>
         <div className='navbar-start'>
           <div className='dropdown'>
@@ -74,8 +74,8 @@ const Navbar = () => {
               tabIndex={0}
               className={`menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-max ${
                 location.pathname === '/'
-                  ? 'bg-white/10 backdrop-blur-sm'
-                  : 'bg-base-300'
+                  ? 'bg-neutral/50 backdrop-blur-sm'
+                  : 'bg-base-300/50 backdrop-blur-sm'
               } `}>
               {links.map(({ key, path, slug }) => (
                 <li key={key}>
@@ -96,7 +96,7 @@ const Navbar = () => {
             {links.map(({ key, path, slug }) => (
               <li key={key}>
                 {slug === 'contacto' ? (
-                  <GhostButton>
+                  <GhostButton classes='font-normal rounded-md w-max'>
                     <a href={path}>{slug}</a>
                   </GhostButton>
                 ) : (
