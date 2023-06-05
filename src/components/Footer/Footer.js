@@ -58,7 +58,7 @@ const Footer = () => {
   return (
     <footer className='footer footer-center px-10 py-8 bg-base-300 text-base-content rounded'>
       <div className='grid grid-flow-col gap-4'>
-        { links.map(({ key, path, slug }) => slug === 'contacto' ? <GhostButton><a href={path}>{slug}</a></GhostButton> : <GhostLink key={key} url={path} classes='min-w-max'>{slug}</GhostLink>)}
+        { links.map(({ key, path, slug }) => slug === 'contacto' ? <GhostButton key={key}><a href={path}>{slug}</a></GhostButton> : <GhostLink key={key} url={path} classes='min-w-max'>{slug}</GhostLink>)}
       </div>
       <div>
         <div className='grid grid-flow-col gap-8'>
