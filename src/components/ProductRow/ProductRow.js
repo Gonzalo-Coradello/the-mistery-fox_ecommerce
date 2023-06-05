@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useNotification } from '../../services/notification/NotificationService'
 import Product from '../../services/axios/productService'
-import { useSessionContext } from '../../context/UserContext'
 const productService = new Product()
 
 const ProductRow = ({
@@ -18,10 +17,10 @@ const ProductRow = ({
   categories,
   thumbnails,
   owner,
+  user
 }) => {
   const [deleted, setDeleted] = useState(false)
   const { setNotification } = useNotification()
-  const { user } = useSessionContext()
 
   const handleDelete = async id => {
     const response = await productService.deleteProduct(id)

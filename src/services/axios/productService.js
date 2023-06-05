@@ -36,6 +36,38 @@ export default class Product {
     return response.data.payload
   }
 
+  getOwnProducts = async (searchParams, owner) => {
+    const category = searchParams.get('category')
+    const page = searchParams.get('page')
+    const limit = searchParams.get('limit')
+    const sort = searchParams.get('sort')
+    const sort_order = searchParams.get('sort_order')
+    const stock = searchParams.get('stock')
+    const search = searchParams.get('search')
+
+    console.log({owner})
+
+    const options = {}
+    options.owner = owner
+    category && (options.category = category)
+    page && (options.page = page)
+    limit && (options.limit = limit)
+    sort && (options.sort = sort)
+    sort_order && (options.sort_order = sort_order)
+    stock && (options.stock = stock)
+    search && (options.search = search)
+
+    const queries = Object.entries(options)
+      .map(subArr => subArr.join('='))
+      .join('&')
+
+    const response =
+      queries === ''
+        ? await axios.get(url_base)
+        : await axios.get(`${url_base}?${queries}`)
+    return response.data.payload
+  }
+
   getOneProduct = async id => {
     const response = await axios.get(`${url_base}/${id}`)
     return response.data.payload

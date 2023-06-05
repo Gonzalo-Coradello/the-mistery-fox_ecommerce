@@ -14,7 +14,7 @@ const tableHead = [
   { value: null, slug: 'Eliminar' },
 ]
 
-const ProductsTable = ({ products, sort, handleSort, loading }) => {
+const ProductsTable = ({ products, sort, handleSort, loading, user }) => {
   if (loading) return <Loader />
 
   return (
@@ -45,7 +45,7 @@ const ProductsTable = ({ products, sort, handleSort, loading }) => {
         </thead>
         <tbody>
           {products.map(product => (
-            <ProductRow key={product._id} {...product} />
+            <ProductRow key={product._id} user={user} {...product} />
           ))}
         </tbody>
       </table>
