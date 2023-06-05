@@ -8,18 +8,68 @@ import { BsSearch } from 'react-icons/bs'
 import LinkButton from '../Buttons/LinkButton'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const books = [
   { title: 'El Principito', src: '/images/saint-exupery_el-principito.png' },
-  { title: 'Romeo and Juliet', src: '/images/shakespeare_romeo-and-juliet.jpg' },
-  { title: 'Cumbres Borrascosas', src: '/images/bronte_cumbres-borrascosas.jpg' },
-  { title: 'Alicia en el País de las Maravillas', src: '/images/carroll_alicia-pais-maravillas.jpg' },
-  { title: 'Phantom of the Opera', src: '/images/leroux_phantom-of-the-opera.jpg' },
+  {
+    title: 'Romeo and Juliet',
+    src: '/images/shakespeare_romeo-and-juliet.jpg',
+  },
+  {
+    title: 'Cumbres Borrascosas',
+    src: '/images/bronte_cumbres-borrascosas.jpg',
+  },
+  {
+    title: 'Alicia en el País de las Maravillas',
+    src: '/images/carroll_alicia-pais-maravillas.jpg',
+  },
+  {
+    title: 'Phantom of the Opera',
+    src: '/images/leroux_phantom-of-the-opera.jpg',
+  },
   { title: 'El Cuervo', src: '/images/poe_el-cuervo.jpg' },
-  { title: 'Orgullo y Prejuicio', src: '/images/austen_pride-and-prejudice.jpg' },
+  {
+    title: 'Orgullo y Prejuicio',
+    src: '/images/austen_pride-and-prejudice.jpg',
+  },
 ]
 
 const LandingPage = () => {
+  const variants = {
+    fadeIn: {
+      hidden: { 
+        opacity: 0,
+        scale: 0.5
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+          duration: 1,
+          delay: 1,
+          type: 'tween',
+          ease: 'easeInOut'
+        },
+      },
+    },
+    dropDown: {
+      hidden: {
+        y: '-100%',
+        opacity: 0
+      },
+      visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 1,
+          delay: 2,
+          type: 'tween',
+          ease: 'easeInOut'
+        },
+      },
+    },
+  }
 
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
@@ -28,33 +78,53 @@ const LandingPage = () => {
 
   const handleClick = e => {
     e.preventDefault()
-    if(search) {
+    if (search) {
       navigate(`/books?search=${search.toLowerCase().replace(' ', '+')}`)
     }
-
   }
 
   return (
     <section className='landing bg-neutral'>
-      <div>
-        <div className='bg-base-100 max-w-[1024px] mx-auto grid justify-center xl:rounded-2xl relative z-10 shadow-md'>
+      <div className='min-h-[430px]'>
+        <motion.div
+          className='bg-base-100 max-w-[1024px] mx-auto grid justify-center xl:rounded-2xl relative z-10 shadow-md'
+          variants={variants.fadeIn}
+          initial='hidden'
+          animate='visible'
+        >
           <div>
             <Logo />
           </div>
-        </div>
-        <div className='shadow-custom w-11/12 max-w-[900px] mx-auto mt-[-1rem] rounded-2xl bg-black/50'>
+        </motion.div>
+        <motion.div
+          className='shadow-custom w-11/12 max-w-[900px] mx-auto mt-[-1rem] rounded-2xl bg-black/50'
+          variants={variants.dropDown}
+          initial='hidden'
+          animate='visible'
+        >
           <div className='booksBackground py-10 rounded-2xl'>
             <div className='z-10 relative'>
-              <h2 className='font-heading text-3xl py-1'>¿Qué libro quieres leer hoy?</h2>
+              <h2 className='font-heading text-3xl py-1'>
+                ¿Qué libro quieres leer hoy?
+              </h2>
               <form className='flex items-center border rounded-2xl px-4 py-2 mx-8 md:mx-20 mt-6'>
-                <input className='font-light w-full bg-transparent outline-none placeholder-white' type='text' value={search} onChange={handleChange} placeholder='Buscar por autor, título, género' />
-                <button onClick={handleClick} className='hover:opacity-50 transition-all duration-300'>
+                <input
+                  className='font-light w-full bg-transparent outline-none placeholder-white'
+                  type='text'
+                  value={search}
+                  onChange={handleChange}
+                  placeholder='Buscar por autor, título, género'
+                />
+                <button
+                  onClick={handleClick}
+                  className='hover:opacity-50 transition-all duration-300'
+                >
                   <BsSearch size={20} />
                 </button>
               </form>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className='container mx-auto px-4'>
