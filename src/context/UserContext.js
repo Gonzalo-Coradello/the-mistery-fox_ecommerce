@@ -14,7 +14,8 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true)
-    userService.getCurrentUser()
+    userService
+      .getCurrentUser()
       .then(data => {
         if (data.payload) {
           setIsLogged(true)
@@ -41,24 +42,20 @@ export const UserProvider = ({ children }) => {
     return data
   }
 
-  const loginWithGithub = async () => {
-    const result = await userService.githubLogin()
-    setIsLogged(true)
-    setUser(result)
-    return result
-  }
-
   const logout = () => {
     setIsLogged(false)
     setUser(null)
     userService.logout()
   }
 
-  const updateRole = async (id) => await userService.updateRole(id)
+  const updateRole = async id => await userService.updateRole(id)
 
   const uploadDocuments = async (id, data) => {
     const response = await userService.uploadDocuments(id, data)
-    setUser(prev => ({ ...prev, documents: prev.documents.concat(response.payload) }))
+    setUser(prev => ({
+      ...prev,
+      documents: prev.documents.concat(response.payload),
+    }))
     return response
   }
 
@@ -72,10 +69,9 @@ export const UserProvider = ({ children }) => {
         getUser,
         register,
         loginWithEmail,
-        loginWithGithub,
         logout,
         updateRole,
-        uploadDocuments
+        uploadDocuments,
       }}
     >
       {children}
