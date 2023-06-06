@@ -4,28 +4,29 @@
 _[en]_ **the mistery fox** is a book boutique which offers an unique experience. Get inspired and enjoy their incredible stories. Full-Stack e-commerce with user authentication.  
 _[es]_ **the mistery fox** es una boutique de libros que ofrece una experiencia única. Inspirate y disfruta sus increíbles historias. E-commerce Full-Stack con autenticación.
 
-## Status
-In progress
-
 ## Features
-- Login/register functionality.
-- Authentication and Authorization with Passport and JWT.
-- Products fetched from MongoDB database.
-- Pagination and filter by category.
-- Fully functional cart.
-- Users, carts and orders get stored in the database.
-- Admin functionality. Admin can add new products and modify or delete existing ones.
+- Fully functional e-commerce connected to a payment processing platform.
+- Authentication and authorization service that includes user registration, login and logout, password change and role change between normal and premium user.
+- Premium role which can create, update or delete its own products.
+- Administrator role with elevated permissions.
+- Products are accesed through the MongoDB database.
+- Products pagination and filter by category.
+- Database persistance for users, products, carts and tickets.
+- Mailing service for user registration, checkout, password change and when a premium user's product gets deleted.
+- File upload service. Profile picture, product images and documents to upgrade to premium.
 - Good user experience, polished design and attention to detail.
 - Completely responsive.
 
 ## Características:
-- Registro de usuarios e inicio de sesión.
-- Autenticación y autorización con Passport y JWT.
+- Proceso de compra completamente funcional conectado con pasarela de pago.
+- Servicio de autenticación y autorización que incluye registro de usuarios, inicio y cierre de sesión, cambio de contraseña y cambio de rol entre usuario normal y premium.
+- Rol de usuario premium con posibilidad de crear, modificar o eliminar sus propios productos.
+- Rol de administrador con permisos elevados.
 - Acceso a los productos a través de base de datos de MongoDB.
 - Paginación de productos y filtrado por categorías.
-- Funcionalidades de carrito completas.
-- Almacenamiento en base de datos de usuarios, carritos y compras.
-- Funciones de administrador. El administrador puede agregar productos nuevos y modificar o eliminar productos existentes.
+- Almacenamiento en base de datos de usuarios, productos, carritos y tickets de compra.
+- Servicio de mailing. Se recibe un email al registrar un usuario, al realizar una compra, al solicitar un cambio de contraseña y al eliminarse un producto de un usuario premium.
+- Servicio de subida de archivos. Foto de perfil, imágenes de producto y documentos para actualizar el usuario a premium. 
 - Buena experiencia de usuario, diseño cuidado y atención a los detalles.
 - Completamente responsive. Se adapta a todas las pantallas.
 
@@ -36,7 +37,7 @@ In progress
 https://github.com/Gonzalo-Coradello/backend-ecommerce
 
 ## Deploy
-Coming soon
+https://themisteryfox.vercel.app/
 
 ## Credits
 _[en]_ Branding, logo and design: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)  
