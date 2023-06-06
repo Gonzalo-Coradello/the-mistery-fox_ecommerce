@@ -1,19 +1,7 @@
 import axios from 'axios'
+import options from './axiosConfig'
 const url_base = `${process.env.REACT_APP_urlBase}/api/sessions`
 const url_base_users = `${process.env.REACT_APP_urlBase}/api/users`
-axios.defaults.withCredentials = true
-
-const options = {
-  headers: {
-    'Content-Type': 'application/json',
-    withCredentials: true,
-    'Access-Control-Allow-Origin': process.env.REACT_APP_urlBase,
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-  },
-}
-
-axios.defaults.headers.common = options.headers
-axios.defaults.headers.post = options.headers
 
 export default class User {
   register = async data => {

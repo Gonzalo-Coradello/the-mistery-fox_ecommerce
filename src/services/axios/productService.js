@@ -1,4 +1,5 @@
 import axios from 'axios'
+import options from './axiosConfig'
 const url_base = `${process.env.REACT_APP_urlBase}/api/products`
 
 export default class Product {
@@ -31,8 +32,8 @@ export default class Product {
 
     const response =
       queries === ''
-        ? await axios.get(url_base)
-        : await axios.get(`${url_base}?${queries}`)
+        ? await axios.get(url_base, options)
+        : await axios.get(`${url_base}?${queries}`, options)
     return response.data.payload
   }
 
@@ -61,28 +62,30 @@ export default class Product {
 
     const response =
       queries === ''
-        ? await axios.get(url_base)
-        : await axios.get(`${url_base}?${queries}`)
+        ? await axios.get(url_base, options)
+        : await axios.get(`${url_base}?${queries}`, options)
     return response.data.payload
   }
 
   getOneProduct = async id => {
-    const response = await axios.get(`${url_base}/${id}`)
+    const response = await axios.get(`${url_base}/${id}`, options)
     return response.data.payload
   }
 
   createProduct = async data => {
-    const response = await axios.postForm(url_base, data, { headers: {'content-type': 'multipart/form-data'}})
+    const response = await axios.postForm(url_base, data, { headers: { 'content-type': 'multipart/form-data', withCredentials: true,
+    'Access-Control-Allow-Origin': process.env.REACT_APP_urlBase,
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',}})
     return response.data.payload
   }
 
   updateProduct = async (id, data) => {
-    const response = await axios.put(`${url_base}/${id}`, data)
+    const response = await axios.put(`${url_base}/${id}`, data, options)
     return response.data.payload
   }
 
   deleteProduct = async id => {
-    const response = await axios.delete(`${url_base}/${id}`)
+    const response = await axios.delete(`${url_base}/${id}`, options)
     return response.data.payload
   }
 }
