@@ -2,27 +2,33 @@ import axios from 'axios'
 const url_base = `${process.env.REACT_APP_urlBase}/api/sessions`
 const url_base_users = `${process.env.REACT_APP_urlBase}/api/users`
 axios.defaults.withCredentials = true
-axios.defaults.headers.common = {
-  'Content-Type': 'application/json'
+
+const options = {
+  headers: {
+    'Content-Type': 'application/json',
+    withCredentials: true,
+    'Access-Control-Allow-Origin': process.env.REACT_APP_urlBase,
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+  },
 }
-axios.defaults.headers.post = {
-  'Content-Type': 'application/json'
-}
+
+axios.defaults.headers.common = options.headers
+axios.defaults.headers.post = options.headers
 
 export default class User {
   register = async data => {
-    const response = await axios.post(`${url_base}/register`, data)
+    const response = await axios.post(`${url_base}/register`, data, options)
     return response.data
   }
 
   login = async data => {
-    const response = await axios.post(`${url_base}/login`, data)
+    const response = await axios.post(`${url_base}/login`, data, options)
     return response.data
   }
 
   getCurrentUser = async () => {
     try {
-      const response = await axios.get(`${url_base}/current`)
+      const response = await axios.get(`${url_base}/current`, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -33,7 +39,7 @@ export default class User {
 
   logout = async () => {
     try {
-      const response = await axios.post(`${url_base}/logout`)
+      const response = await axios.post(`${url_base}/logout`, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -43,7 +49,7 @@ export default class User {
 
   getAllUsers = async () => {
     try {
-      const response = await axios.get(`${url_base_users}`)
+      const response = await axios.get(`${url_base_users}`, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data.payload
     } catch (error) {
@@ -53,7 +59,7 @@ export default class User {
 
   deleteInactiveUsers = async () => {
     try {
-      const response = await axios.delete(`${url_base_users}`)
+      const response = await axios.delete(`${url_base_users}`, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -63,7 +69,7 @@ export default class User {
 
   updateRole = async id => {
     try {
-      const response = await axios.put(`${url_base_users}/premium/${id}`)
+      const response = await axios.put(`${url_base_users}/premium/${id}`, {}, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -73,17 +79,17 @@ export default class User {
 
   updateUser = async (email, data) => {
     try {
-      const response = await axios.put(`${url_base_users}/${email}`, data)
+      const response = await axios.put(`${url_base_users}/${email}`, data, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
       return { status: 'error', error }
     }
   }
-  
+
   deleteUser = async email => {
     try {
-      const response = await axios.delete(`${url_base_users}/email/${email}`)
+      const response = await axios.delete(`${url_base_users}/email/${email}`, options)
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -93,7 +99,11 @@ export default class User {
 
   uploadDocuments = async (id, data) => {
     try {
-      const response = await axios.postForm(`${url_base_users}/${id}/documents`, data,  { headers: {'content-type': 'multipart/form-data'}})
+      const response = await axios.postForm(
+        `${url_base_users}/${id}/documents`,
+        data,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      )
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
@@ -103,7 +113,7 @@ export default class User {
 
   sendPasswordEmail = async email => {
     try {
-      const response = await axios.post(`${url_base}/password_reset`, { email })
+      const response = await axios.post(`${url_base}/password_reset`, { email }, options)
       console.log(response)
       if (!response) return { status: 'error', error: 'Error' }
       return response?.data
@@ -114,7 +124,10 @@ export default class User {
 
   changePassword = async (id, token, newPassword, confirmation) => {
     try {
-      const response = await axios.put(`${url_base}/password_reset/${id}/${token}`, { newPassword, confirmation })
+      const response = await axios.put(
+        `${url_base}/password_reset/${id}/${token}`,
+        { newPassword, confirmation }, options
+      )
       if (!response) return { status: 'error', error: 'Error' }
       return response?.data
     } catch (error) {
