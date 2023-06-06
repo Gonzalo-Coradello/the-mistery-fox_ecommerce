@@ -18,7 +18,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     const response = await loginWithEmail(formData)
-    if (response.status !== 'success') {
+    if (!response || response.status !== 'success') {
       setNotification('error', 'Ha ocurrido un error')
       return
     }
