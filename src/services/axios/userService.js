@@ -2,6 +2,12 @@ import axios from 'axios'
 const url_base = `${process.env.REACT_APP_urlBase}/api/sessions`
 const url_base_users = `${process.env.REACT_APP_urlBase}/api/users`
 axios.defaults.withCredentials = true
+axios.defaults.headers.common = {
+  'Content-Type': 'application/json'
+}
+axios.defaults.headers.post = {
+  'Content-Type': 'application/json'
+}
 
 export default class User {
   register = async data => {
@@ -20,7 +26,8 @@ export default class User {
       if (!response) return { status: 'error', error: 'Auth error' }
       return response?.data
     } catch (error) {
-      return { status: 'error', error }
+      console.error(error)
+      return { status: 'error', error: error.message }
     }
   }
 

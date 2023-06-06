@@ -45,8 +45,6 @@ export default class Product {
     const stock = searchParams.get('stock')
     const search = searchParams.get('search')
 
-    console.log({owner})
-
     const options = {}
     options.owner = owner
     category && (options.category = category)
