@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/autoplay'
 import { BsSearch } from 'react-icons/bs'
 import LinkButton from '../Buttons/LinkButton'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -73,6 +73,10 @@ const LandingPage = () => {
 
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    document.title = 'the mistery fox'
+  }, [])
 
   const handleChange = e => setSearch(e.target.value)
 

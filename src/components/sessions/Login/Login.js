@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSessionContext } from '../../../context/UserContext'
 import { useNotification } from '../../../services/notification/NotificationService'
 import Button from '../../Buttons/Button'
 import GhostLink from '../../Buttons/GhostLink'
+import Loader from '../../Loader/Loader'
 
 const Login = () => {
   const { loginWithEmail } = useSessionContext()
   const [formData, setFormData] = useState({ email: '', password: '' })
+  const [loading, setLoading] = useState(false)
   const { setNotification } = useNotification()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    document.title = 'Iniciar sesión'
+  }, [])
 
   const handleChange = e => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -17,9 +23,11 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+    setLoading(true)
     const response = await loginWithEmail(formData)
     if (!response || response.status !== 'success') {
       setNotification('error', 'Ha ocurrido un error')
+      setLoading(false)
       return
     }
     const { first_name, last_name } = response.payload
@@ -27,8 +35,11 @@ const Login = () => {
       'success',
       `Iniciaste sesión como ${first_name} ${last_name}`
     )
+    setLoading(false)
     navigate('/books')
   }
+
+  if(loading) return <Loader />
 
   return (
     <section>

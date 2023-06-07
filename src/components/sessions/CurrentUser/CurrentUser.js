@@ -17,6 +17,10 @@ const CurrentUser = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    document.title = 'Mi cuenta'
+  }, [])
+
+  useEffect(() => {
     user.documents?.find(doc => doc.name === 'profile')
       ? setImage(`${process.env.REACT_APP_urlBase}/images/profiles/${user.id}.png`)
       : setImage(null)

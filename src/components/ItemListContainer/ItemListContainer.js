@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ItemList from '../ItemList/ItemList'
 import Loader from '../Loader/Loader'
 import { useLocation } from 'react-router-dom'
@@ -11,6 +11,7 @@ const productService = new Product()
 
 const ItemListContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const [category, setCategory] = useState('')
   const location = useLocation()
   const queries = location.search
   const page = searchParams.get('page')
@@ -26,7 +27,8 @@ const ItemListContainer = () => {
   }, [])
 
   const handleCategory = selectedCategory => {
-    setSearchParams({ category: selectedCategory })
+    setCategory(selectedCategory.title)
+    setSearchParams({ category: selectedCategory.slug })
   }
 
   if (loading) return <Loader />
@@ -42,7 +44,7 @@ const ItemListContainer = () => {
   return (
     <section className='bg-base-100'>
       <Categories handleClick={handleCategory} />
-      <h1 className='text-3xl mb-8 mt-8'>Todos nuestros libros</h1>
+      <h1 className='text-3xl mb-8 mt-8'>{ category ? category : 'Todos nuestros libros' }</h1>
       <ItemList products={products} />
       <div className='space-x-8 mt-4'>
         {prevPage[0] && (

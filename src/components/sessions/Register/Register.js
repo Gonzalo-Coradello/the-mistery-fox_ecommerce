@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSessionContext } from '../../../context/UserContext'
 import { useNotification } from '../../../services/notification/NotificationService'
 import Button from '../../Buttons/Button'
@@ -18,6 +18,10 @@ const Register = () => {
     password: '',
   })
 
+  useEffect(() => {
+    document.title = 'Registrarse'
+  }, [])
+
   const handleChange = e => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -35,7 +39,7 @@ const Register = () => {
 
   return (
     <section>
-      <h2 className='text-2xl mt-12 mb-8'>Registrar usuarios</h2>
+      <h2 className='text-2xl mt-12 mb-8'>Registrarse</h2>
 
       <form>
         <input
