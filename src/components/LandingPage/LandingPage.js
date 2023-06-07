@@ -108,7 +108,7 @@ const LandingPage = () => {
         >
           <div className='booksBackground py-10 rounded-2xl'>
             <div className='z-10 relative'>
-              <h2 className='font-heading text-3xl py-1'>
+              <h2 className='font-heading text-[1.65rem] md:text-3xl py-1'>
                 ¿Qué libro quieres leer hoy?
               </h2>
               <form className='flex items-center border rounded-2xl px-4 py-2 mx-8 md:mx-20 mt-6'>
