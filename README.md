@@ -44,10 +44,26 @@ _[en]_ Branding, logo and design: [Talia Laborde](https://www.linkedin.com/in/ta
 _[es]_ Diseño, branding y logo: [Talia Laborde](https://www.linkedin.com/in/talia-laborde/)
 
 ## Screeenshots
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-1.jpg)
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-2.jpg)
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-3.jpg)
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-4.jpg)
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-5.jpg)
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-6.jpg)
-![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-7.jpg)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-1.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-2.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-3.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-4.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-5.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-6.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-7.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-8.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-9.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-10.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-11.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-12.png)
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/the-mistery-fox-13.png)
+
+## Demo
+### Proceso de compra / Purchasing process
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/demo-purchase.gif)
+
+### Landing page, login, profile
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/demo-login-profile.gif)
+
+### Admin - Products table
+![](https://github.com/Gonzalo-Coradello/the-mistery-fox_ecommerce/blob/main/screenshots/demo-admin.gif)
