@@ -133,7 +133,7 @@ const LandingPage = () => {
 
       <div className='container mx-auto px-4'>
         <h2 className='text-4xl font-heading text-secondary my-14'>
-          Inspírate y disfruta nuestras increíble historias
+          Inspírate y disfruta nuestras increíbles historias
         </h2>
         <h3 className='max-w-[900px] mx-auto text-3xl font-heading text-secondary text-left mb-8'>
           Los más vendidos
